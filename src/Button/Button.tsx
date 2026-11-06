@@ -7,8 +7,8 @@ import './Button.css';
 export type ButtonProps = {
     /** One `primary` per panel or dialog. @default 'primary' */
     variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
-    /** @default 'md' */
-    size?: 'sm' | 'md' | 'lg';
+    /** @default 'medium' */
+    size?: 'small' | 'medium' | 'large';
     /** An icon name or any node. Shown before the label; replaced by a spinner while `loading`. */
     icon?: IconName | ReactNode;
     /** An icon name or any node, shown after the label. */
@@ -19,7 +19,7 @@ export type ButtonProps = {
 
 export function Button({
     variant = 'primary',
-    size = 'md',
+    size = 'medium',
     icon,
     iconRight,
     loading = false,
@@ -47,10 +47,10 @@ export function Button({
             {loading ? (
                 <span className="dg-btn__spinner" aria-hidden="true" />
             ) : (
-                renderIcon(icon, size === 'sm' ? 14 : 16)
+                renderIcon(icon, size === 'small' ? 14 : 16)
             )}
             {children}
-            {renderIcon(iconRight, size === 'sm' ? 14 : 16)}
+            {renderIcon(iconRight, size === 'small' ? 14 : 16)}
         </button>
     );
 }

@@ -27,7 +27,7 @@ export const Default: Story = {};
 export const WithAction: Story = {
     args: {
         action: (
-            <Button size="sm" variant="outline">
+            <Button size="small" variant="outline">
                 Remind
             </Button>
         ),

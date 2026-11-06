@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="696" height="116" viewBox="0 0 696 116" role="img" aria-label="Dark Glass">
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34363a"/><stop offset="1" stop-color="#17181a"/></linearGradient>
+    <linearGradient id="tint" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7a4d"/><stop offset="1" stop-color="#d63e1e"/></linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.16"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="pane" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.34"/><stop offset="1" stop-color="#fff" stop-opacity="0.08"/></linearGradient>
+    <clipPath id="clip"><rect width="104" height="104" rx="26"/></clipPath>
+  </defs>
+  <g transform="translate(0 6)">
+  <rect width="104" height="104" rx="26" fill="url(#tile)"/>
+  <g clip-path="url(#clip)"><rect width="104" height="52" fill="url(#sheen)"/></g>
+  <rect x="0.5" y="0.5" width="103" height="103" rx="25.5" fill="none" stroke="#fff" stroke-opacity="0.14"/>
+  <rect x="21" y="21" width="42" height="42" rx="14" fill="url(#tint)"/>
+  <rect x="38.5" y="38.5" width="45" height="45" rx="15" fill="url(#pane)" stroke="#fff" stroke-opacity="0.5"/>
+  </g>
+  <g transform="translate(146 42) scale(0.8)" fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <path transform="translate(0 0)" d="M60 -34V60M60 30A30 30 0 1 1 0 30A30 30 0 1 1 60 30"/>
+    <path transform="translate(88 0)" d="M60 0V60M60 30A30 30 0 1 1 0 30A30 30 0 1 1 60 30"/>
+    <path transform="translate(176 0)" d="M0 0V60M0 32A26 32 0 0 1 26 0"/>
+    <path transform="translate(230 0)" d="M0 -34V60M40 2L0 38M14 26L44 60"/>
+    <path transform="translate(344 0)" d="M60 0V52A28 28 0 0 1 32 80H22M60 30A30 30 0 1 1 0 30A30 30 0 1 1 60 30"/>
+    <path transform="translate(432 0)" d="M0 -34V60"/>
+    <path transform="translate(460 0)" d="M60 0V60M60 30A30 30 0 1 1 0 30A30 30 0 1 1 60 30"/>
+    <path transform="translate(548 0)" d="M38 12C30 0 6 0 6 16C6 32 40 26 40 44C40 62 12 62 2 50"/>
+    <path transform="translate(620 0)" d="M38 12C30 0 6 0 6 16C6 32 40 26 40 44C40 62 12 62 2 50"/>
+  </g>
+</svg>

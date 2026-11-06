@@ -21,9 +21,9 @@ describe('Avatar', () => {
 
     it('applies size and status', () => {
         const { container } = render(
-            <Avatar initials="MS" size="lg" status="online" />,
+            <Avatar initials="MS" size="large" status="online" />,
         );
-        expect(screen.getByRole('img')).toHaveClass('dg-avatar--lg');
+        expect(screen.getByRole('img')).toHaveClass('dg-avatar--large');
         expect(
             container.querySelector('.dg-avatar__status--online'),
         ).toBeInTheDocument();

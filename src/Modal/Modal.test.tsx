@@ -37,11 +37,11 @@ describe('Modal', () => {
 
     it('applies size', () => {
         render(
-            <Modal open title="T" size="lg">
+            <Modal open title="T" size="large">
                 x
             </Modal>,
         );
-        expect(screen.getByRole('dialog')).toHaveClass('dg-modal--lg');
+        expect(screen.getByRole('dialog')).toHaveClass('dg-modal--large');
     });
 
     it('renders nothing when closed', () => {

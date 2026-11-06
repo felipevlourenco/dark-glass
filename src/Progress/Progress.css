@@ -7,10 +7,10 @@
     background: var(--border);
     overflow: hidden;
 }
-.dg-progress--sm {
+.dg-progress--small {
     height: 6px;
 }
-.dg-progress--lg {
+.dg-progress--large {
     height: 12px;
 }
 .dg-progress__fill {

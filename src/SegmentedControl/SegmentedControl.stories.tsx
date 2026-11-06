@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 export const Neutral: Story = { args: { tone: 'neutral' } };
-export const Small: Story = { args: { size: 'sm' } };
+export const Small: Story = { args: { size: 'small' } };
 export const WithCounts: Story = {
     args: {
         options: [

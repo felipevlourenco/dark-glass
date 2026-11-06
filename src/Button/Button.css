@@ -22,11 +22,11 @@
     outline: 2px solid var(--focus);
     outline-offset: 2px;
 }
-.dg-btn--sm {
+.dg-btn--small {
     height: 32px;
     padding: 0 14px;
 }
-.dg-btn--lg {
+.dg-btn--large {
     height: 48px;
     padding: 0 var(--space-6);
 }

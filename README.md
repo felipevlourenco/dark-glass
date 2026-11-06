@@ -1,10 +1,31 @@
-# Dark Glass
+<h1 align="center">
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.svg" />
+        <img src="docs/assets/logo-light.svg" alt="Dark Glass" height="72" />
+    </picture>
+</h1>
 
-A React component library for dense, money-and-property dashboards: frosted glass panels over a dark ground, pill-shaped controls and one hot colour for the action that matters.
+<p align="center">
+    A React component library for dense dashboards: frosted glass panels and pill controls.<br />
+    Two themes from one set of tokens, accessible by default, TypeScript included.
+</p>
 
-Two themes ship from the same tokens: **Ember** (orange primary, dark glass) and **Ink** (near-black primary, frosted light glass).
+<p align="center">
+    <a href="https://www.npmjs.com/package/dark-glass"><img alt="npm version" src="https://img.shields.io/npm/v/dark-glass?color=d63e1e&labelColor=17181a" /></a>
+    <a href="https://github.com/felipevlourenco/dark-glass/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/felipevlourenco/dark-glass/ci.yml?branch=main&label=CI&labelColor=17181a" /></a>
+    <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/npm/l/dark-glass?color=d63e1e&labelColor=17181a" /></a>
+    <a href="https://felipevlourenco.github.io/dark-glass/"><img alt="Storybook" src="https://img.shields.io/badge/Storybook-live-d63e1e?labelColor=17181a" /></a>
+</p>
 
-**Storybook:** https://felipevlourenco.github.io/dark-glass/
+**[Live Storybook →](https://felipevlourenco.github.io/dark-glass/)** · **[Dashboard showcase →](https://felipevlourenco.github.io/dark-glass/?path=/story/showcase-dashboard--overview)**
+
+## Features
+
+- **22 components**: buttons, form controls, display pieces and overlays.
+- **Two themes**, Ember (dark glass, orange primary) and Ink (frosted light glass, near-black primary), from one set of design tokens. Switch with a `data-theme` attribute.
+- **Accessible by default**: real roles and labels, keyboard support, focus trapping in overlays, a visible focus ring everywhere and reduced motion respected.
+- **TypeScript-first**: every component exports its props type.
+- **Self-contained styles**: the ESM build imports its own CSS.
 
 ## Install
 
