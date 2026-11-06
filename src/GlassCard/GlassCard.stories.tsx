@@ -5,7 +5,9 @@ import { GlassCard } from './GlassCard';
 const Stage = ({ children }: { children: React.ReactNode }) => (
     <div
         style={{
-            padding: 48,
+            minHeight: '100vh',
+            display: 'grid',
+            placeItems: 'center',
             background:
                 'radial-gradient(90% 120% at 12% 0%, var(--bg-wash), transparent 70%), var(--bg)',
         }}
@@ -18,6 +20,7 @@ const meta = {
     title: 'Components/GlassCard',
     component: GlassCard,
     tags: ['autodocs'],
+    parameters: { layout: 'fullscreen' },
     args: { children: 'Portfolio value' },
     decorators: [
         (Story) => (
