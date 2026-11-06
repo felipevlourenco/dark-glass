@@ -1,0 +1,13 @@
+.dg-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+.dg-field__label,
+.dg-field__msg {
+    color: var(--text-muted);
+}
+.dg-field__msg.is-error {
+    color: var(--danger);
+}

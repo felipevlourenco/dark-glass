@@ -57,3 +57,10 @@ describe('Button', () => {
         expect(screen.getByTestId('trail')).toBeInTheDocument();
     });
 });
+
+describe('Button icon names', () => {
+    it('renders an icon from its name', () => {
+        const { container } = render(<Button icon="plus">Add</Button>);
+        expect(container.querySelector('svg')).toBeInTheDocument();
+    });
+});
