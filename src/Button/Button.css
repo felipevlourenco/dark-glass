@@ -1,0 +1,105 @@
+.dg-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    box-sizing: border-box;
+    height: 40px;
+    padding: 0 var(--space-5);
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    background: none;
+    color: var(--text);
+    font-family: var(--font-sans);
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.1s ease;
+}
+.dg-btn:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+}
+.dg-btn--sm {
+    height: 32px;
+    padding: 0 14px;
+}
+.dg-btn--lg {
+    height: 48px;
+    padding: 0 var(--space-6);
+}
+.dg-btn:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.dg-btn--primary {
+    background: var(--primary);
+    color: var(--on-primary);
+    box-shadow: var(--shadow-primary);
+}
+.dg-btn--primary:hover:not(:disabled) {
+    background: var(--primary-hover);
+}
+.dg-btn--primary:active:not(:disabled) {
+    background: var(--primary-pressed);
+}
+.dg-btn--secondary {
+    background: var(--glass-raised);
+    border-color: var(--border);
+}
+.dg-btn--secondary:hover:not(:disabled) {
+    background: var(--selected);
+}
+.dg-btn--outline {
+    border-color: var(--border-strong);
+}
+.dg-btn--outline:hover:not(:disabled),
+.dg-btn--ghost:hover:not(:disabled) {
+    background: var(--hover);
+}
+.dg-btn--danger {
+    background: var(--danger-soft);
+    color: var(--danger);
+    border-color: var(--danger);
+}
+.dg-btn--danger:hover:not(:disabled) {
+    background: var(--danger);
+    color: var(--surface-overlay);
+}
+
+.dg-btn:disabled {
+    cursor: not-allowed;
+}
+.dg-btn:disabled:not(.is-loading) {
+    color: var(--text-disabled);
+    background: var(--glass-inset);
+    border-color: var(--border);
+    box-shadow: none;
+}
+.dg-btn.is-loading {
+    cursor: progress;
+}
+
+.dg-btn__spinner {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    animation: dg-btn-spin 0.7s linear infinite;
+}
+@keyframes dg-btn-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .dg-btn {
+        transition: none;
+    }
+    .dg-btn__spinner {
+        animation-duration: 2s;
+    }
+}

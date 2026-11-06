@@ -1,0 +1,53 @@
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { clsx } from '../utils/clsx';
+import './Button.css';
+
+export type ButtonProps = {
+    /** One `primary` per panel or dialog. @default 'primary' */
+    variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
+    /** @default 'md' */
+    size?: 'sm' | 'md' | 'lg';
+    /** Shown before the label; replaced by a spinner while `loading`. */
+    icon?: ReactNode;
+    iconRight?: ReactNode;
+    /** Disables the button and shows a spinner. */
+    loading?: boolean;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
+
+export function Button({
+    variant = 'primary',
+    size = 'md',
+    icon,
+    iconRight,
+    loading = false,
+    className,
+    children,
+    type = 'button',
+    disabled,
+    ...props
+}: ButtonProps) {
+    return (
+        <button
+            {...props}
+            type={type}
+            className={clsx(
+                'dg-btn',
+                'label',
+                `dg-btn--${variant}`,
+                `dg-btn--${size}`,
+                { 'is-loading': loading },
+                className,
+            )}
+            disabled={disabled || loading}
+            aria-busy={loading || undefined}
+        >
+            {loading ? (
+                <span className="dg-btn__spinner" aria-hidden="true" />
+            ) : (
+                icon
+            )}
+            {children}
+            {iconRight}
+        </button>
+    );
+}
