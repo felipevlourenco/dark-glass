@@ -11,9 +11,9 @@ export type ModalProps = {
     title: string;
     description?: string;
     /** Buttons, right-aligned. One `primary` at most. */
-    footer?: ReactNode;
-    /** @default 'medium' */
-    size?: 'small' | 'medium' | 'large';
+    actions?: ReactNode;
+    /** @default 'md' */
+    size?: 'sm' | 'md' | 'lg';
     className?: string;
     children?: ReactNode;
 };
@@ -24,8 +24,8 @@ export function Modal({
     onClose,
     title,
     description,
-    footer,
-    size = 'medium',
+    actions,
+    size = 'md',
     className,
     children,
 }: ModalProps) {
@@ -46,7 +46,7 @@ export function Modal({
                 titleId={titleId}
                 title={title}
                 description={description}
-                footer={footer}
+                actions={actions}
                 onClose={onClose}
             >
                 {children}

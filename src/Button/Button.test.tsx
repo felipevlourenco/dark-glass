@@ -32,7 +32,11 @@ describe('Button', () => {
     it('is disabled and busy while loading, and ignores clicks', async () => {
         const onClick = vi.fn();
         render(
-            <Button loading icon={<i data-testid="icon" />} onClick={onClick}>
+            <Button
+                loading
+                leadingIcon={<i data-testid="icon" />}
+                onClick={onClick}
+            >
                 Go
             </Button>,
         );
@@ -47,8 +51,8 @@ describe('Button', () => {
     it('renders leading and trailing icons', () => {
         render(
             <Button
-                icon={<i data-testid="lead" />}
-                iconRight={<i data-testid="trail" />}
+                leadingIcon={<i data-testid="lead" />}
+                trailingIcon={<i data-testid="trail" />}
             >
                 Next
             </Button>,
@@ -60,7 +64,14 @@ describe('Button', () => {
 
 describe('Button icon names', () => {
     it('renders an icon from its name', () => {
-        const { container } = render(<Button icon="plus">Add</Button>);
+        const { container } = render(<Button leadingIcon="plus">Add</Button>);
         expect(container.querySelector('svg')).toBeInTheDocument();
+    });
+});
+
+describe('Button fullWidth', () => {
+    it('stretches to its container', () => {
+        render(<Button fullWidth>Save</Button>);
+        expect(screen.getByRole('button')).toHaveClass('dg-btn--full');
     });
 });

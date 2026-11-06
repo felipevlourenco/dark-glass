@@ -4,7 +4,7 @@ import './Tooltip.css';
 
 export type TooltipProps = {
     /** Short text. Never the only place the information lives. */
-    label: string;
+    content: string;
     /** @default 'top' */
     placement?: 'top' | 'bottom';
     /** Forces it visible. */
@@ -16,7 +16,7 @@ export type TooltipProps = {
 
 /** A label on hover or keyboard focus. Esc hides it. */
 export function Tooltip({
-    label,
+    content,
     placement = 'top',
     open,
     className,
@@ -51,7 +51,7 @@ export function Tooltip({
                         `dg-tooltip--${placement}`,
                     )}
                 >
-                    {label}
+                    {content}
                 </span>
             ) : null}
         </span>

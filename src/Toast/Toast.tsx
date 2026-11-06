@@ -25,8 +25,8 @@ export type ToastProps = {
     /** Label of a single action button, e.g. `Undo`. */
     action?: string;
     onAction?: () => void;
-    /** Shows a dismiss button. */
-    onClose?: () => void;
+    /** Called by the dismiss button, which shows only when this is set. */
+    onDismiss?: () => void;
     /** Overrides the tone's icon. */
     icon?: IconName;
     className?: string;
@@ -39,7 +39,7 @@ export function Toast({
     description,
     action,
     onAction,
-    onClose,
+    onDismiss,
     icon,
     className,
 }: ToastProps) {
@@ -62,13 +62,13 @@ export function Toast({
                     {action}
                 </Button>
             ) : null}
-            {onClose ? (
+            {onDismiss ? (
                 <IconButton
                     icon="x"
                     label="Dismiss"
                     variant="ghost"
                     size="small"
-                    onClick={onClose}
+                    onClick={onDismiss}
                 />
             ) : null}
         </div>

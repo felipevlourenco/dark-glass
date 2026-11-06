@@ -28,7 +28,7 @@ function Demo(args: React.ComponentProps<typeof Modal>) {
                 {...args}
                 open={open}
                 onClose={close}
-                footer={
+                actions={
                     <>
                         <Button variant="ghost" onClick={close}>
                             Cancel
@@ -47,6 +47,6 @@ function Demo(args: React.ComponentProps<typeof Modal>) {
 
 export const Default: Story = { render: (args) => <Demo {...args} /> };
 export const Large: Story = {
-    args: { size: 'large' },
+    args: { size: 'lg' },
     render: (args) => <Demo {...args} />,
 };

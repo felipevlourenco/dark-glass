@@ -14,10 +14,15 @@ describe('SegmentedControl', () => {
     });
 
     it('selects on click and reports the value', async () => {
-        const onChange = vi.fn();
-        render(<SegmentedControl options={options} onChange={onChange} />);
+        const onValueChange = vi.fn();
+        render(
+            <SegmentedControl
+                options={options}
+                onValueChange={onValueChange}
+            />,
+        );
         await userEvent.click(screen.getByRole('radio', { name: 'Year' }));
-        expect(onChange).toHaveBeenCalledWith('Year');
+        expect(onValueChange).toHaveBeenCalledWith('Year');
         expect(screen.getByRole('radio', { name: 'Year' })).toBeChecked();
     });
 

@@ -16,17 +16,17 @@ describe('Slider', () => {
     });
 
     it('updates and reports a number when uncontrolled', () => {
-        const onChange = vi.fn();
-        render(<Slider label="LTV" onChange={onChange} />);
+        const onValueChange = vi.fn();
+        render(<Slider label="LTV" onValueChange={onValueChange} />);
         fireEvent.change(screen.getByRole('slider'), {
             target: { value: '70' },
         });
-        expect(onChange).toHaveBeenCalledWith(70);
+        expect(onValueChange).toHaveBeenCalledWith(70);
         expect(screen.getByRole('slider')).toHaveValue('70');
     });
 
     it('follows `value` when controlled', () => {
-        render(<Slider label="LTV" value={20} onChange={() => {}} />);
+        render(<Slider label="LTV" value={20} onValueChange={() => {}} />);
         fireEvent.change(screen.getByRole('slider'), {
             target: { value: '70' },
         });

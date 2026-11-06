@@ -16,19 +16,19 @@ describe('Toast', () => {
 
     it('runs the action and dismiss callbacks', async () => {
         const onAction = vi.fn();
-        const onClose = vi.fn();
+        const onDismiss = vi.fn();
         render(
             <Toast
                 title="Removed"
                 action="Undo"
                 onAction={onAction}
-                onClose={onClose}
+                onDismiss={onDismiss}
             />,
         );
         await userEvent.click(screen.getByRole('button', { name: 'Undo' }));
         await userEvent.click(screen.getByRole('button', { name: 'Dismiss' }));
         expect(onAction).toHaveBeenCalledOnce();
-        expect(onClose).toHaveBeenCalledOnce();
+        expect(onDismiss).toHaveBeenCalledOnce();
     });
 
     it('has no buttons unless asked', () => {

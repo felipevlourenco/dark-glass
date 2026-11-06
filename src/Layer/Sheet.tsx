@@ -6,18 +6,18 @@ export type SheetProps = {
     titleId: string;
     title: string;
     description?: string;
-    footer?: ReactNode;
+    actions?: ReactNode;
     onClose?: () => void;
     scroll?: boolean;
     children?: ReactNode;
 };
 
-/** Title row with a close button, a body and an optional footer. */
+/** Title row with a close button, a body and an optional row of actions. */
 export function Sheet({
     titleId,
     title,
     description,
-    footer,
+    actions,
     onClose,
     scroll,
     children,
@@ -48,8 +48,8 @@ export function Sheet({
             >
                 {children}
             </div>
-            {footer ? (
-                <footer className="dg-sheet__foot">{footer}</footer>
+            {actions ? (
+                <footer className="dg-sheet__foot">{actions}</footer>
             ) : null}
         </>
     );

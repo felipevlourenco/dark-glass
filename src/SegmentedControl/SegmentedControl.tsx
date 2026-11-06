@@ -10,7 +10,7 @@ export type SegmentedControlProps = {
     value?: string;
     /** Defaults to the first option. */
     defaultValue?: string;
-    onChange?: (value: string) => void;
+    onValueChange?: (value: string) => void;
     /** Accessible name of the group. */
     label?: string;
     /** `primary` fills the selected item; `neutral` is subtler. @default 'primary' */
@@ -24,7 +24,7 @@ export function SegmentedControl({
     options,
     value,
     defaultValue,
-    onChange,
+    onValueChange,
     label,
     tone = 'primary',
     size = 'medium',
@@ -40,7 +40,7 @@ export function SegmentedControl({
     );
     const select = (next: string) => {
         setSelected(next);
-        onChange?.(next);
+        onValueChange?.(next);
     };
     const onKeyDown = (
         event: KeyboardEvent<HTMLButtonElement>,

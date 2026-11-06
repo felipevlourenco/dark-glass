@@ -5,7 +5,7 @@ import { Tooltip } from './Tooltip';
 
 const setup = (props: Partial<React.ComponentProps<typeof Tooltip>> = {}) => {
     render(
-        <Tooltip label="Copy link" {...props}>
+        <Tooltip content="Copy link" {...props}>
             <IconButton icon="share" label="Share" />
         </Tooltip>,
     );

@@ -10,9 +10,11 @@ export type ButtonProps = {
     /** @default 'medium' */
     size?: 'small' | 'medium' | 'large';
     /** An icon name or any node. Shown before the label; replaced by a spinner while `loading`. */
-    icon?: IconName | ReactNode;
+    leadingIcon?: IconName | ReactNode;
     /** An icon name or any node, shown after the label. */
-    iconRight?: IconName | ReactNode;
+    trailingIcon?: IconName | ReactNode;
+    /** Stretch to the width of the container. */
+    fullWidth?: boolean;
     /** Disables the button and shows a spinner. */
     loading?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
@@ -20,8 +22,9 @@ export type ButtonProps = {
 export function Button({
     variant = 'primary',
     size = 'medium',
-    icon,
-    iconRight,
+    leadingIcon,
+    trailingIcon,
+    fullWidth = false,
     loading = false,
     className,
     children,
@@ -38,7 +41,7 @@ export function Button({
                 'label',
                 `dg-btn--${variant}`,
                 `dg-btn--${size}`,
-                { 'is-loading': loading },
+                { 'is-loading': loading, 'dg-btn--full': fullWidth },
                 className,
             )}
             disabled={disabled || loading}
@@ -47,10 +50,10 @@ export function Button({
             {loading ? (
                 <span className="dg-btn__spinner" aria-hidden="true" />
             ) : (
-                renderIcon(icon, size === 'small' ? 14 : 16)
+                renderIcon(leadingIcon, size === 'small' ? 14 : 16)
             )}
             {children}
-            {renderIcon(iconRight, size === 'small' ? 14 : 16)}
+            {renderIcon(trailingIcon, size === 'small' ? 14 : 16)}
         </button>
     );
 }

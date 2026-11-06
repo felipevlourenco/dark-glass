@@ -8,7 +8,7 @@ const meta = {
     tags: ['autodocs'],
     args: {
         trigger: (
-            <Button variant="secondary" iconRight="chevron-down">
+            <Button variant="secondary" trailingIcon="chevron-down">
                 Actions
             </Button>
         ),

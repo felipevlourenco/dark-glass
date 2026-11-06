@@ -3,13 +3,13 @@ import userEvent from '@testing-library/user-event';
 import { Modal } from './Modal';
 
 describe('Modal', () => {
-    it('is a dialog named by its title, with a description and footer', () => {
+    it('is a dialog named by its title, with a description and actions', () => {
         render(
             <Modal
                 open
                 title="Remove property"
                 description="This cannot be undone."
-                footer={<button>Remove</button>}
+                actions={<button>Remove</button>}
             >
                 Body text
             </Modal>,
@@ -37,11 +37,11 @@ describe('Modal', () => {
 
     it('applies size', () => {
         render(
-            <Modal open title="T" size="large">
+            <Modal open title="T" size="lg">
                 x
             </Modal>,
         );
-        expect(screen.getByRole('dialog')).toHaveClass('dg-modal--large');
+        expect(screen.getByRole('dialog')).toHaveClass('dg-modal--lg');
     });
 
     it('renders nothing when closed', () => {
