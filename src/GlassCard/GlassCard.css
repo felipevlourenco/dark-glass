@@ -1,0 +1,27 @@
+.dg-card {
+    position: relative;
+    box-sizing: border-box;
+    padding: var(--space-5);
+    color: var(--text);
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-glass);
+    -webkit-backdrop-filter: blur(var(--blur-md)) saturate(140%);
+    backdrop-filter: blur(var(--blur-md)) saturate(140%);
+}
+.dg-card--raised {
+    background: var(--glass-raised);
+}
+.dg-card--inset {
+    padding: var(--space-3) var(--space-4);
+    background: var(--glass-inset);
+    border-radius: var(--radius-md);
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+.dg-card--overlay {
+    background: var(--surface-overlay);
+    box-shadow: var(--shadow-lg);
+}

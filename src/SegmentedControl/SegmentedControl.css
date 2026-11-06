@@ -1,0 +1,62 @@
+.dg-seg {
+    align-self: flex-start;
+    display: inline-flex;
+    gap: 2px;
+    padding: 4px;
+    border-radius: var(--radius-pill);
+    background: var(--glass-inset);
+    border: 1px solid var(--border);
+}
+.dg-seg__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 var(--space-4);
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: none;
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+.dg-seg__item:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+}
+.dg-seg--sm .dg-seg__item {
+    height: 26px;
+    padding: 0 var(--space-3);
+}
+.dg-seg__item:hover:not(.is-selected) {
+    background: var(--hover);
+    color: var(--text);
+}
+.dg-seg--primary .dg-seg__item.is-selected {
+    background: var(--primary);
+    color: var(--on-primary);
+    box-shadow: var(--shadow-primary);
+}
+.dg-seg--neutral .dg-seg__item.is-selected {
+    background: var(--selected);
+    color: var(--text);
+}
+.dg-seg__count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: var(--radius-pill);
+    background: var(--hover);
+    font-size: 11px;
+    line-height: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+    .dg-seg__item {
+        transition: none;
+    }
+}

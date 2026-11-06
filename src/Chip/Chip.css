@@ -1,0 +1,29 @@
+.dg-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-sizing: border-box;
+    height: 30px;
+    padding: 0 var(--space-3);
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border);
+    background: var(--glass-raised);
+    color: var(--text);
+    font-family: var(--font-sans);
+    white-space: nowrap;
+}
+.dg-chip.is-interactive {
+    cursor: pointer;
+}
+.dg-chip.is-interactive:hover {
+    background: var(--selected);
+}
+.dg-chip:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+}
+.dg-chip.is-selected {
+    background: var(--primary);
+    border-color: transparent;
+    color: var(--on-primary);
+}

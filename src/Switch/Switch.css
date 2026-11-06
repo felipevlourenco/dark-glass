@@ -1,0 +1,55 @@
+.dg-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--text);
+    font-family: var(--font-sans);
+    cursor: pointer;
+}
+.dg-switch:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+}
+.dg-switch__track {
+    position: relative;
+    box-sizing: border-box;
+    width: 44px;
+    height: 26px;
+    border-radius: var(--radius-pill);
+    background: var(--glass-inset);
+    border: 1px solid var(--border-strong);
+    transition: background-color 0.15s ease;
+}
+.dg-switch__thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    transition:
+        transform 0.15s ease,
+        background-color 0.15s ease;
+}
+.dg-switch.is-on .dg-switch__track {
+    background: var(--primary);
+    border-color: transparent;
+}
+.dg-switch.is-on .dg-switch__thumb {
+    transform: translateX(18px);
+    background: var(--on-primary);
+}
+.dg-switch:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+@media (prefers-reduced-motion: reduce) {
+    .dg-switch__track,
+    .dg-switch__thumb {
+        transition: none;
+    }
+}
