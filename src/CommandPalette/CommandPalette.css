@@ -1,0 +1,81 @@
+.dg-cmd {
+    width: 100%;
+    max-width: 560px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+.dg-cmd__search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    box-sizing: border-box;
+    padding: 0 var(--space-5);
+    height: 56px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+}
+.dg-cmd__search input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--text);
+    font-family: var(--font-sans);
+}
+.dg-cmd__search input::placeholder {
+    color: var(--text-subtle);
+    opacity: 1;
+}
+.dg-cmd__list {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    padding: var(--space-2);
+}
+.dg-cmd__label {
+    padding: var(--space-2) var(--space-3) var(--space-1);
+    color: var(--text-subtle);
+    font-size: 11px;
+    line-height: 14px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.dg-cmd__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    box-sizing: border-box;
+    min-height: 36px;
+    padding: 0 var(--space-3);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    cursor: pointer;
+}
+.dg-cmd__item.is-active {
+    background: var(--selected);
+}
+.dg-cmd__item > .dg-icon {
+    color: var(--text-muted);
+}
+.dg-cmd__text {
+    flex: 1;
+    min-width: 0;
+}
+.dg-cmd__hint {
+    color: var(--text-muted);
+}
+.dg-cmd__empty {
+    padding: var(--space-6);
+    text-align: center;
+    color: var(--text-muted);
+}
+.dg-cmd__foot {
+    display: flex;
+    gap: var(--space-5);
+    padding: var(--space-3) var(--space-5);
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+}

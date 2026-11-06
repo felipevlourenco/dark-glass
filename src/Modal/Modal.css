@@ -1,0 +1,15 @@
+.dg-modal {
+    width: 100%;
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    gap: var(--space-5);
+}
+.dg-modal--sm {
+    max-width: 400px;
+}
+.dg-modal--md {
+    max-width: 480px;
+}
+.dg-modal--lg {
+    max-width: 640px;
+}

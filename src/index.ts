@@ -19,3 +19,11 @@ export {
 export { Select, type SelectProps } from './Select/Select';
 export { Slider, type SliderProps } from './Slider/Slider';
 export { Switch, type SwitchProps } from './Switch/Switch';
+export {
+    CommandPalette,
+    type CommandGroup,
+    type CommandItem,
+    type CommandPaletteProps,
+} from './CommandPalette/CommandPalette';
+export { Drawer, type DrawerProps } from './Drawer/Drawer';
+export { Modal, type ModalProps } from './Modal/Modal';
