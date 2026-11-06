@@ -1,0 +1,39 @@
+name: CI
+
+on:
+    pull_request:
+        branches: [main]
+        # `edited` re-runs the PR title check when the title is fixed
+        types: [opened, synchronize, reopened, edited]
+
+permissions:
+    contents: read
+
+concurrency:
+    group: ci-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    check:
+        runs-on: ubuntu-latest
+        env:
+            HUSKY: 0
+        steps:
+            - uses: actions/checkout@v7
+            - uses: pnpm/action-setup@v6 # version comes from package.json "packageManager"
+            - uses: actions/setup-node@v7
+              with:
+                  node-version: 24
+                  cache: pnpm
+            - run: pnpm install --frozen-lockfile
+            # squash-merging makes the PR title the commit semantic-release reads
+            - name: Lint PR title
+              run: echo "$PR_TITLE" | pnpm exec commitlint
+              env:
+                  PR_TITLE: ${{ github.event.pull_request.title }}
+            - run: pnpm format:check
+            - run: pnpm lint
+            - run: pnpm typecheck
+            - run: pnpm test
+            - run: pnpm build
+            - run: pnpm build-storybook
