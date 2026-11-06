@@ -8,7 +8,7 @@ const meta = {
     tags: ['autodocs'],
     args: {
         trigger: (
-            <Button variant="secondary" iconRight="chevron-down">
+            <Button variant="secondary" trailingIcon="chevron-down">
                 Actions
             </Button>
         ),
@@ -50,4 +50,25 @@ export const AlignedToEnd: Story = {
         ),
     ],
 };
+export const FlipsNearTheEdge: Story = {
+    parameters: { layout: 'fullscreen' },
+    args: { defaultOpen: true },
+    decorators: [
+        (Story) => (
+            <div
+                style={{
+                    height: '100vh',
+                    display: 'flex',
+                    alignItems: 'flex-end',
+                    justifyContent: 'flex-end',
+                    padding: 24,
+                    boxSizing: 'border-box',
+                }}
+            >
+                <Story />
+            </div>
+        ),
+    ],
+};
+
 export const OpenByDefault: Story = { args: { defaultOpen: true } };

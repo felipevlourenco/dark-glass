@@ -6,7 +6,7 @@ import './Switch.css';
 export type SwitchProps = {
     checked?: boolean;
     defaultChecked?: boolean;
-    onChange?: (on: boolean) => void;
+    onCheckedChange?: (checked: boolean) => void;
     /** Visible text, and the accessible name. Without it pass `aria-label`. */
     label?: string;
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onChange'>;
@@ -14,7 +14,7 @@ export type SwitchProps = {
 export function Switch({
     checked,
     defaultChecked = false,
-    onChange,
+    onCheckedChange,
     label,
     className,
     onClick,
@@ -31,7 +31,7 @@ export function Switch({
             onClick={(event) => {
                 onClick?.(event);
                 setOn(!on);
-                onChange?.(!on);
+                onCheckedChange?.(!on);
             }}
         >
             <span className="dg-switch__track" aria-hidden="true">

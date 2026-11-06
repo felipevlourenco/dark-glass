@@ -7,7 +7,7 @@ const meta = {
     component: Tooltip,
     tags: ['autodocs'],
     args: {
-        label: 'Share this home',
+        content: 'Share this home',
         children: <IconButton icon="share" label="Share" />,
     },
     decorators: [

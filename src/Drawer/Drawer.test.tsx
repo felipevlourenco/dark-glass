@@ -16,7 +16,7 @@ describe('Drawer', () => {
 
     it('can open on the left', () => {
         render(
-            <Drawer open title="Menu" side="left">
+            <Drawer open title="Menu" from="left">
                 x
             </Drawer>,
         );

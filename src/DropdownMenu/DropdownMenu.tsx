@@ -11,6 +11,7 @@ import {
 import { renderIcon } from '../Icon/renderIcon';
 import type { IconName } from '../Icon/icons';
 import { Kbd } from '../Kbd/Kbd';
+import { useFlip } from '../hooks/useFlip';
 import { usePopup, type PopupState } from '../hooks/usePopup';
 import { clsx } from '../utils/clsx';
 import '../Popup/Popup.css';
@@ -42,10 +43,11 @@ export type DropdownMenuProps = {
     className?: string;
 } & PopupState;
 
-// ponytail: no collision detection; the menu always opens below the trigger.
-// Add flipping (floating-ui) if menus near the viewport edge get clipped.
-
-/** Actions in a menu. Arrow keys, Home and End move; Esc and Tab close. */
+/**
+ * Actions in a menu. Arrow keys, Home and End move; Esc and Tab close. It
+ * flips above the trigger, or to the other edge, when it would run off the
+ * screen.
+ */
 export function DropdownMenu({
     trigger,
     items,
@@ -55,6 +57,13 @@ export function DropdownMenu({
 }: DropdownMenuProps) {
     const { open, set, ref: popupRef, focusTrigger } = usePopup(state);
     const menu = useRef<HTMLDivElement>(null);
+    const side = useFlip({
+        open,
+        anchor: popupRef,
+        panel: menu,
+        vertical: 'bottom',
+        horizontal: align,
+    });
     const pending = useRef<1 | -1 | 0>(0);
 
     const focusItem = (delta: 1 | -1 | 'first' | 'last') => {
@@ -135,7 +144,7 @@ export function DropdownMenu({
                     className={clsx(
                         'dg-menu',
                         'dg-pop__panel',
-                        `dg-pop__panel--bottom-${align}`,
+                        `dg-pop__panel--${side.vertical}-${side.horizontal}`,
                     )}
                 >
                     {items.map((item, index) => {

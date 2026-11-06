@@ -104,8 +104,8 @@ Every component is documented with live examples and props in Storybook.
 
 ### Known limits
 
-- `DropdownMenu` and `Popover` open on the side you choose and do not flip near the viewport edge.
-- `Toast` is presentational: you decide which toasts render and when they go. There is no queue or auto-dismiss.
+- `DropdownMenu`, `Popover` and `Tooltip` flip to the other side when they would run off the screen. They check the viewport when they open, not on scroll or resize, and they ignore scroll containers that clip.
+- `Toast` dismisses itself after `duration` ms (5 s by default, paused while hovered or focused), but there is no toast queue: you decide which toasts render.
 - Inputs do not forward `ref` yet (the library supports React 18).
 
 ## Tokens

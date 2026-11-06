@@ -1,10 +1,17 @@
-import { cloneElement, useId, useState, type ReactElement } from 'react';
+import {
+    cloneElement,
+    useId,
+    useRef,
+    useState,
+    type ReactElement,
+} from 'react';
+import { useFlip } from '../hooks/useFlip';
 import { clsx } from '../utils/clsx';
 import './Tooltip.css';
 
 export type TooltipProps = {
     /** Short text. Never the only place the information lives. */
-    label: string;
+    content: string;
     /** @default 'top' */
     placement?: 'top' | 'bottom';
     /** Forces it visible. */
@@ -14,9 +21,12 @@ export type TooltipProps = {
     children: ReactElement<{ 'aria-describedby'?: string }>;
 };
 
-/** A label on hover or keyboard focus. Esc hides it. */
+/**
+ * A label on hover or keyboard focus. Esc hides it. It flips to the other side
+ * when it would run off the screen.
+ */
 export function Tooltip({
-    label,
+    content,
     placement = 'top',
     open,
     className,
@@ -25,9 +35,18 @@ export function Tooltip({
     const [hovered, setHovered] = useState(false);
     const id = useId();
     const show = open ?? hovered;
+    const wrapper = useRef<HTMLSpanElement>(null);
+    const tip = useRef<HTMLSpanElement>(null);
+    const { vertical } = useFlip({
+        open: show,
+        anchor: wrapper,
+        panel: tip,
+        vertical: placement,
+    });
     return (
         // The wrapper only listens; the child inside is the focusable thing.
         <span
+            ref={wrapper}
             role="presentation"
             className={clsx('dg-tipwrap', className)}
             onMouseEnter={() => setHovered(true)}
@@ -43,15 +62,16 @@ export function Tooltip({
             })}
             {show ? (
                 <span
+                    ref={tip}
                     role="tooltip"
                     id={id}
                     className={clsx(
                         'dg-tooltip',
                         'caption',
-                        `dg-tooltip--${placement}`,
+                        `dg-tooltip--${vertical}`,
                     )}
                 >
-                    {label}
+                    {content}
                 </span>
             ) : null}
         </span>

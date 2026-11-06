@@ -5,7 +5,7 @@ const meta = {
     title: 'Components/Avatar',
     component: Avatar,
     tags: ['autodocs'],
-    args: { initials: 'MS', name: 'Marta Silva' },
+    args: { name: 'Marta Silva' },
 } satisfies Meta<typeof Avatar>;
 export default meta;
 
