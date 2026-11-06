@@ -27,8 +27,8 @@ export const Variants: Story = {
 export const Sizes: Story = {
     render: (args) => (
         <div style={row}>
-            <IconButton {...args} size="sm" />
-            <IconButton {...args} size="md" />
+            <IconButton {...args} size="small" />
+            <IconButton {...args} size="medium" />
         </div>
     ),
 };

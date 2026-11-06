@@ -8,8 +8,8 @@ export type AvatarProps = {
     src?: string;
     /** Accessible name. Falls back to the initials. */
     name?: string;
-    /** @default 'md' */
-    size?: 'sm' | 'md' | 'lg';
+    /** @default 'medium' */
+    size?: 'small' | 'medium' | 'large';
     status?: 'online' | 'busy';
 } & HTMLAttributes<HTMLSpanElement>;
 
@@ -17,7 +17,7 @@ export function Avatar({
     initials,
     src,
     name,
-    size = 'md',
+    size = 'medium',
     status,
     className,
     ...props

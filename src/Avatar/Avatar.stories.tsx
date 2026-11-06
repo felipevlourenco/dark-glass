@@ -16,7 +16,7 @@ export const Default: Story = {};
 export const Sizes: Story = {
     render: (args) => (
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            {(['sm', 'md', 'lg'] as const).map((size) => (
+            {(['small', 'medium', 'large'] as const).map((size) => (
                 <Avatar key={size} {...args} size={size} />
             ))}
         </div>

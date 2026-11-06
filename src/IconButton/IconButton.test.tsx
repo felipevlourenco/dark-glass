@@ -8,16 +8,24 @@ describe('IconButton', () => {
         const button = screen.getByRole('button', { name: 'Notifications' });
         expect(button).toHaveAttribute('type', 'button');
         expect(button).toHaveAttribute('title', 'Notifications');
-        expect(button).toHaveClass('dg-iconbtn--secondary', 'dg-iconbtn--md');
+        expect(button).toHaveClass(
+            'dg-iconbtn--secondary',
+            'dg-iconbtn--medium',
+        );
     });
 
     it('applies variant and size', () => {
         render(
-            <IconButton icon="plus" label="New" variant="primary" size="sm" />,
+            <IconButton
+                icon="plus"
+                label="New"
+                variant="primary"
+                size="small"
+            />,
         );
         expect(screen.getByRole('button')).toHaveClass(
             'dg-iconbtn--primary',
-            'dg-iconbtn--sm',
+            'dg-iconbtn--small',
         );
     });
 

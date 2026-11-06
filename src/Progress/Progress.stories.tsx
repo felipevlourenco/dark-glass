@@ -42,7 +42,7 @@ export const Tones: Story = {
 export const Sizes: Story = {
     render: (args) => (
         <div style={{ display: 'grid', gap: 12 }}>
-            {(['sm', 'md', 'lg'] as const).map((size) => (
+            {(['small', 'medium', 'large'] as const).map((size) => (
                 <Progress key={size} {...args} size={size} />
             ))}
         </div>

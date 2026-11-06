@@ -4,12 +4,12 @@
     padding: var(--space-6);
     gap: var(--space-5);
 }
-.dg-modal--sm {
+.dg-modal--small {
     max-width: 400px;
 }
-.dg-modal--md {
+.dg-modal--medium {
     max-width: 480px;
 }
-.dg-modal--lg {
+.dg-modal--large {
     max-width: 640px;
 }

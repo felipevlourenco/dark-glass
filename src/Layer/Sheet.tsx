@@ -37,7 +37,7 @@ export function Sheet({
                     icon="x"
                     label="Close"
                     variant="ghost"
-                    size="sm"
+                    size="small"
                     onClick={onClose}
                 />
             </header>

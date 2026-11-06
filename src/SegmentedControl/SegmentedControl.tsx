@@ -15,8 +15,8 @@ export type SegmentedControlProps = {
     label?: string;
     /** `primary` fills the selected item; `neutral` is subtler. @default 'primary' */
     tone?: 'primary' | 'neutral';
-    /** @default 'md' */
-    size?: 'sm' | 'md';
+    /** @default 'medium' */
+    size?: 'small' | 'medium';
 } & Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'defaultValue'>;
 
 /** Pick one of a few options. Arrow keys move the selection. */
@@ -27,7 +27,7 @@ export function SegmentedControl({
     onChange,
     label,
     tone = 'primary',
-    size = 'md',
+    size = 'medium',
     className,
     ...props
 }: SegmentedControlProps) {

@@ -20,8 +20,8 @@ export type ProgressProps = {
     tone?: Tone;
     /** Accessible name. Segments default to "Label 40%, …". */
     label?: string;
-    /** @default 'md' */
-    size?: 'sm' | 'md' | 'lg';
+    /** @default 'medium' */
+    size?: 'small' | 'medium' | 'large';
     /** Stacked bar: each segment's share is its value over the total. */
     segments?: { value: number; tone?: Tone; label: string }[];
 } & Omit<HTMLAttributes<HTMLDivElement>, 'children'>;
@@ -31,7 +31,7 @@ export function Progress({
     max = 100,
     tone = 'positive',
     label,
-    size = 'md',
+    size = 'medium',
     segments,
     className,
     ...props

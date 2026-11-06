@@ -58,7 +58,7 @@ export function Toast({
                 ) : null}
             </div>
             {action ? (
-                <Button variant="outline" size="sm" onClick={onAction}>
+                <Button variant="outline" size="small" onClick={onAction}>
                     {action}
                 </Button>
             ) : null}
@@ -67,7 +67,7 @@ export function Toast({
                     icon="x"
                     label="Dismiss"
                     variant="ghost"
-                    size="sm"
+                    size="small"
                     onClick={onClose}
                 />
             ) : null}

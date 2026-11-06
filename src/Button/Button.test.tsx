@@ -7,18 +7,18 @@ describe('Button', () => {
         render(<Button>Save</Button>);
         const button = screen.getByRole('button', { name: 'Save' });
         expect(button).toHaveAttribute('type', 'button');
-        expect(button).toHaveClass('dg-btn--primary', 'dg-btn--md');
+        expect(button).toHaveClass('dg-btn--primary', 'dg-btn--medium');
     });
 
     it('applies variant and size', () => {
         render(
-            <Button variant="danger" size="lg">
+            <Button variant="danger" size="large">
                 Delete
             </Button>,
         );
         expect(screen.getByRole('button')).toHaveClass(
             'dg-btn--danger',
-            'dg-btn--lg',
+            'dg-btn--large',
         );
     });
 

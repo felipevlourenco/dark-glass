@@ -12,8 +12,8 @@ export type ModalProps = {
     description?: string;
     /** Buttons, right-aligned. One `primary` at most. */
     footer?: ReactNode;
-    /** @default 'md' */
-    size?: 'sm' | 'md' | 'lg';
+    /** @default 'medium' */
+    size?: 'small' | 'medium' | 'large';
     className?: string;
     children?: ReactNode;
 };
@@ -25,7 +25,7 @@ export function Modal({
     title,
     description,
     footer,
-    size = 'md',
+    size = 'medium',
     className,
     children,
 }: ModalProps) {

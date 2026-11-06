@@ -5,7 +5,7 @@ const meta = {
     title: 'Components/Button',
     component: Button,
     tags: ['autodocs'],
-    args: { children: 'Add property', variant: 'primary', size: 'md' },
+    args: { children: 'Add property', variant: 'primary', size: 'medium' },
 } satisfies Meta<typeof Button>;
 export default meta;
 
@@ -18,7 +18,7 @@ const variants = [
     'ghost',
     'danger',
 ] as const;
-const sizes = ['sm', 'md', 'lg'] as const;
+const sizes = ['small', 'medium', 'large'] as const;
 const row = { display: 'flex', alignItems: 'center', gap: 12 } as const;
 
 export const Default: Story = {};

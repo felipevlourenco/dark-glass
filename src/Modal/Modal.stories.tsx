@@ -47,6 +47,6 @@ function Demo(args: React.ComponentProps<typeof Modal>) {
 
 export const Default: Story = { render: (args) => <Demo {...args} /> };
 export const Large: Story = {
-    args: { size: 'lg' },
+    args: { size: 'large' },
     render: (args) => <Demo {...args} />,
 };

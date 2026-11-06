@@ -10,8 +10,8 @@ export type IconButtonProps = {
     label: string;
     /** @default 'secondary' */
     variant?: 'primary' | 'secondary' | 'ghost';
-    /** @default 'md' */
-    size?: 'sm' | 'md';
+    /** @default 'medium' */
+    size?: 'small' | 'medium';
     /** A small count bubble, such as unread notifications. */
     badge?: ReactNode;
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'aria-label'>;
@@ -20,7 +20,7 @@ export function IconButton({
     icon,
     label,
     variant = 'secondary',
-    size = 'md',
+    size = 'medium',
     badge,
     className,
     type = 'button',
@@ -39,7 +39,7 @@ export function IconButton({
                 className,
             )}
         >
-            <Icon name={icon} size={size === 'sm' ? 16 : 18} />
+            <Icon name={icon} size={size === 'small' ? 16 : 18} />
             {badge ? (
                 <span className="dg-iconbtn__badge" aria-hidden="true">
                     {badge}
