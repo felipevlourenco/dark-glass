@@ -5,5 +5,3 @@ Component library: frosted panels, pill controls, two themes (`ember`, `ink`) se
 ```bash
 pnpm storybook   # component workbench
 ```
-
-`src/styles/tokens.json` is the design-system source; `tokens.css` is generated from it.
