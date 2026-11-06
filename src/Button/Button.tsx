@@ -1,4 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { renderIcon } from '../Icon/renderIcon';
+import type { IconName } from '../Icon/icons';
 import { clsx } from '../utils/clsx';
 import './Button.css';
 
@@ -7,9 +9,10 @@ export type ButtonProps = {
     variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
     /** @default 'md' */
     size?: 'sm' | 'md' | 'lg';
-    /** Shown before the label; replaced by a spinner while `loading`. */
-    icon?: ReactNode;
-    iconRight?: ReactNode;
+    /** An icon name or any node. Shown before the label; replaced by a spinner while `loading`. */
+    icon?: IconName | ReactNode;
+    /** An icon name or any node, shown after the label. */
+    iconRight?: IconName | ReactNode;
     /** Disables the button and shows a spinner. */
     loading?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
@@ -44,10 +47,10 @@ export function Button({
             {loading ? (
                 <span className="dg-btn__spinner" aria-hidden="true" />
             ) : (
-                icon
+                renderIcon(icon, size === 'sm' ? 14 : 16)
             )}
             {children}
-            {iconRight}
+            {renderIcon(iconRight, size === 'sm' ? 14 : 16)}
         </button>
     );
 }

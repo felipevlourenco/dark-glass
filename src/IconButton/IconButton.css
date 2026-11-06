@@ -1,0 +1,64 @@
+.dg-iconbtn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    background: none;
+    color: var(--text);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+.dg-iconbtn:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+}
+.dg-iconbtn--sm {
+    width: 32px;
+    height: 32px;
+}
+.dg-iconbtn--secondary {
+    background: var(--glass-raised);
+    border-color: var(--border);
+}
+.dg-iconbtn--secondary:hover,
+.dg-iconbtn--ghost:hover {
+    background: var(--hover);
+}
+.dg-iconbtn--primary {
+    background: var(--primary);
+    color: var(--on-primary);
+    box-shadow: var(--shadow-primary);
+}
+.dg-iconbtn--primary:hover {
+    background: var(--primary-hover);
+}
+.dg-iconbtn__badge {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    box-sizing: border-box;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-pill);
+    background: var(--primary);
+    color: var(--on-primary);
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 500;
+    border: 2px solid var(--bg);
+}
+@media (prefers-reduced-motion: reduce) {
+    .dg-iconbtn {
+        transition: none;
+    }
+}

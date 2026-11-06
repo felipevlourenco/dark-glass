@@ -1,0 +1,15 @@
+.dg-kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: var(--radius-xs);
+    background: var(--glass-inset);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    line-height: 1;
+}

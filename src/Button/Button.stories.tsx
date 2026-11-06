@@ -59,3 +59,7 @@ export const States: Story = {
         </div>
     ),
 };
+
+export const WithIcons: Story = {
+    args: { icon: 'plus', iconRight: 'chevron-down' },
+};
