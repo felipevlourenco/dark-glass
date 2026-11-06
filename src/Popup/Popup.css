@@ -1,0 +1,33 @@
+/* Shared by DropdownMenu and Popover: a wrapper and an anchored panel. */
+.dg-pop {
+    position: relative;
+    display: inline-flex;
+}
+.dg-pop__panel {
+    position: absolute;
+    z-index: var(--z-menu);
+    box-sizing: border-box;
+    color: var(--text);
+    background: var(--surface-overlay);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    font-family: var(--font-sans);
+    -webkit-backdrop-filter: blur(var(--blur-md));
+    backdrop-filter: blur(var(--blur-md));
+}
+.dg-pop__panel--bottom-start,
+.dg-pop__panel--bottom-end {
+    top: calc(100% + 8px);
+}
+.dg-pop__panel--top-start,
+.dg-pop__panel--top-end {
+    bottom: calc(100% + 8px);
+}
+.dg-pop__panel--bottom-start,
+.dg-pop__panel--top-start {
+    left: 0;
+}
+.dg-pop__panel--bottom-end,
+.dg-pop__panel--top-end {
+    right: 0;
+}

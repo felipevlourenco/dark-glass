@@ -1,0 +1,60 @@
+.dg-menu {
+    width: max-content;
+    min-width: 220px;
+    max-width: 320px;
+    padding: 6px;
+    border-radius: var(--radius-md);
+}
+.dg-menu__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 36px;
+    padding: 0 var(--space-3);
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: none;
+    color: var(--text);
+    font-family: var(--font-sans);
+    text-align: left;
+    cursor: pointer;
+}
+.dg-menu__item:hover:not(:disabled),
+.dg-menu__item:focus-visible {
+    background: var(--selected);
+    outline: 0;
+}
+.dg-menu__item:disabled {
+    color: var(--text-disabled);
+    cursor: not-allowed;
+}
+.dg-menu__item.is-danger {
+    color: var(--danger);
+}
+.dg-menu__item > .dg-icon {
+    color: var(--text-muted);
+}
+.dg-menu__item.is-danger > .dg-icon {
+    color: var(--danger);
+}
+.dg-menu__text {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+}
+.dg-menu__sep {
+    height: 1px;
+    margin: 6px 4px;
+    background: var(--border);
+}
+.dg-menu__label {
+    padding: var(--space-2) var(--space-3) var(--space-1);
+    color: var(--text-subtle);
+    font-size: 11px;
+    line-height: 14px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
