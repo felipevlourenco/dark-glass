@@ -1,12 +1,14 @@
 import {
     cloneElement,
     useId,
+    useRef,
     type CSSProperties,
     type MouseEvent,
     type MouseEventHandler,
     type ReactElement,
     type ReactNode,
 } from 'react';
+import { useFlip } from '../hooks/useFlip';
 import { usePopup, type PopupState } from '../hooks/usePopup';
 import { clsx } from '../utils/clsx';
 import '../Popup/Popup.css';
@@ -28,9 +30,10 @@ export type PopoverProps = {
     children?: ReactNode;
 } & PopupState;
 
-// ponytail: same as DropdownMenu, no collision detection.
-
-/** A small non-modal panel next to its trigger. Esc or an outside press closes it. */
+/**
+ * A small non-modal panel next to its trigger. Esc or an outside press closes
+ * it. It flips to the other side when it would run off the screen.
+ */
 export function Popover({
     trigger,
     title,
@@ -45,6 +48,18 @@ export function Popover({
     const popup = usePopup(state);
     const { ref: popupRef } = popup;
     const titleId = useId();
+    const panel = useRef<HTMLDivElement>(null);
+    const [preferredV, preferredH] = placement.split('-') as [
+        'top' | 'bottom',
+        'start' | 'end',
+    ];
+    const side = useFlip({
+        open: popup.open,
+        anchor: popupRef,
+        panel,
+        vertical: preferredV,
+        horizontal: preferredH,
+    });
     return (
         <span ref={popupRef} className={clsx('dg-pop', className)}>
             {cloneElement(trigger, {
@@ -57,13 +72,14 @@ export function Popover({
             } as object)}
             {popup.open ? (
                 <div
+                    ref={panel}
                     role="dialog"
                     aria-labelledby={title ? titleId : undefined}
                     aria-label={title ? undefined : label}
                     className={clsx(
                         'dg-popover',
                         'dg-pop__panel',
-                        `dg-pop__panel--${placement}`,
+                        `dg-pop__panel--${side.vertical}-${side.horizontal}`,
                     )}
                     style={width ? ({ width } as CSSProperties) : undefined}
                 >

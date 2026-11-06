@@ -3,6 +3,7 @@ import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
 import type { IconName } from '../Icon/icons';
 import { IconButton } from '../IconButton/IconButton';
+import { useAutoDismiss } from '../hooks/useAutoDismiss';
 import { clsx } from '../utils/clsx';
 import './Toast.css';
 
@@ -25,8 +26,17 @@ export type ToastProps = {
     /** Label of a single action button, e.g. `Undo`. */
     action?: string;
     onAction?: () => void;
-    /** Called by the dismiss button, which shows only when this is set. */
+    /**
+     * Called by the dismiss button and when `duration` runs out. The parent
+     * removes the toast. The button and the auto-dismiss need this to be set.
+     */
     onDismiss?: () => void;
+    /**
+     * Ms before `onDismiss` fires. The clock pauses while the toast is hovered
+     * or has focus, and resumes with the time that was left. 0 turns
+     * auto-dismiss off. @default 5000
+     */
+    duration?: number;
     /** Overrides the tone's icon. */
     icon?: IconName;
     className?: string;
@@ -40,11 +50,16 @@ export function Toast({
     action,
     onAction,
     onDismiss,
+    duration = 5000,
     icon,
     className,
 }: ToastProps) {
+    const timer = useAutoDismiss(onDismiss, duration);
     return (
+        // The handlers only pause the timer; nothing here is a control.
+        // oxlint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
         <div
+            {...timer}
             role={tone === 'danger' ? 'alert' : 'status'}
             className={clsx('dg-toast', className)}
         >

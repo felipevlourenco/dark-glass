@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Button } from '../Button/Button';
+import { mockLayout } from '../test-utils';
 import { Popover } from './Popover';
 
 const setup = (props: Partial<React.ComponentProps<typeof Popover>> = {}) => {
@@ -68,5 +69,55 @@ describe('Popover', () => {
         const dialog = screen.getByRole('dialog');
         expect(dialog).toHaveStyle({ width: '200px' });
         expect(dialog).toHaveClass('dg-pop__panel--top-end');
+    });
+
+    describe('near the screen edge', () => {
+        afterEach(() => {
+            vi.restoreAllMocks();
+            vi.unstubAllGlobals();
+        });
+        const panel = { width: 320, height: 200 };
+
+        it('opens above the trigger when there is no room below', async () => {
+            mockLayout({
+                trigger: { left: 100, top: 700, width: 80, height: 40 },
+                panel,
+            });
+            const trigger = setup();
+            await userEvent.click(trigger);
+            expect(screen.getByRole('dialog')).toHaveClass(
+                'dg-pop__panel--top-start',
+            );
+        });
+
+        it('lines up with the end edge when it would run off the right', async () => {
+            mockLayout({
+                trigger: { left: 900, top: 100, width: 80, height: 40 },
+                panel,
+            });
+            const trigger = setup();
+            await userEvent.click(trigger);
+            expect(screen.getByRole('dialog')).toHaveClass(
+                'dg-pop__panel--bottom-end',
+            );
+        });
+
+        it('forgets an earlier flip when it opens again with room', async () => {
+            mockLayout({
+                trigger: { left: 100, top: 700, width: 80, height: 40 },
+                panel,
+            });
+            const trigger = setup();
+            await userEvent.click(trigger);
+            await userEvent.click(trigger);
+            mockLayout({
+                trigger: { left: 100, top: 100, width: 80, height: 40 },
+                panel,
+            });
+            await userEvent.click(trigger);
+            expect(screen.getByRole('dialog')).toHaveClass(
+                'dg-pop__panel--bottom-start',
+            );
+        });
     });
 });

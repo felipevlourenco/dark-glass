@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { IconButton } from '../IconButton/IconButton';
+import { mockLayout } from '../test-utils';
 import { Tooltip } from './Tooltip';
 
 const setup = (props: Partial<React.ComponentProps<typeof Tooltip>> = {}) => {
@@ -43,5 +44,32 @@ describe('Tooltip', () => {
     it('can be forced open and placed below', () => {
         setup({ open: true, placement: 'bottom' });
         expect(screen.getByRole('tooltip')).toHaveClass('dg-tooltip--bottom');
+    });
+
+    describe('near the screen edge', () => {
+        afterEach(() => {
+            vi.restoreAllMocks();
+            vi.unstubAllGlobals();
+        });
+
+        it('shows below the trigger when there is no room above', () => {
+            mockLayout({
+                trigger: { left: 100, top: 10, width: 40, height: 40 },
+                panel: { width: 100, height: 30 },
+            });
+            setup({ open: true });
+            expect(screen.getByRole('tooltip')).toHaveClass(
+                'dg-tooltip--bottom',
+            );
+        });
+
+        it('shows above the trigger when there is no room below', () => {
+            mockLayout({
+                trigger: { left: 100, top: 740, width: 40, height: 20 },
+                panel: { width: 100, height: 30 },
+            });
+            setup({ open: true, placement: 'bottom' });
+            expect(screen.getByRole('tooltip')).toHaveClass('dg-tooltip--top');
+        });
     });
 });

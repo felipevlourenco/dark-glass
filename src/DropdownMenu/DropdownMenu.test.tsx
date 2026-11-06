@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Button } from '../Button/Button';
+import { mockLayout } from '../test-utils';
 import { DropdownMenu, type MenuItem } from './DropdownMenu';
 
 const setup = (items?: MenuItem[]) => {
@@ -94,5 +95,37 @@ describe('DropdownMenu', () => {
         await userEvent.click(trigger);
         await userEvent.click(document.body);
         expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+    });
+
+    describe('near the screen edge', () => {
+        afterEach(() => {
+            vi.restoreAllMocks();
+            vi.unstubAllGlobals();
+        });
+        const panel = { width: 220, height: 200 };
+
+        it('opens above the trigger when there is no room below', async () => {
+            mockLayout({
+                trigger: { left: 100, top: 700, width: 80, height: 40 },
+                panel,
+            });
+            const { trigger } = setup();
+            await userEvent.click(trigger);
+            expect(screen.getByRole('menu')).toHaveClass(
+                'dg-pop__panel--top-start',
+            );
+        });
+
+        it('swaps its alignment when it would run off the screen', async () => {
+            mockLayout({
+                trigger: { left: 900, top: 100, width: 80, height: 40 },
+                panel,
+            });
+            const { trigger } = setup();
+            await userEvent.click(trigger);
+            expect(screen.getByRole('menu')).toHaveClass(
+                'dg-pop__panel--bottom-end',
+            );
+        });
     });
 });

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Toast, ToastRegion } from './Toast';
 
@@ -41,6 +41,40 @@ describe('Toast', () => {
         expect(
             container.querySelector('.dg-toast__icon--positive'),
         ).toBeInTheDocument();
+    });
+});
+
+describe('Toast auto-dismiss', () => {
+    beforeEach(() => vi.useFakeTimers());
+    afterEach(() => vi.useRealTimers());
+
+    it('dismisses itself after 5 seconds by default', () => {
+        const onDismiss = vi.fn();
+        render(<Toast title="Saved" onDismiss={onDismiss} />);
+        act(() => vi.advanceTimersByTime(4999));
+        expect(onDismiss).not.toHaveBeenCalled();
+        act(() => vi.advanceTimersByTime(1));
+        expect(onDismiss).toHaveBeenCalledOnce();
+    });
+
+    it('takes a custom duration, and 0 keeps it until dismissed by hand', () => {
+        const onDismiss = vi.fn();
+        const { rerender } = render(
+            <Toast title="Saved" onDismiss={onDismiss} duration={1000} />,
+        );
+        act(() => vi.advanceTimersByTime(1000));
+        expect(onDismiss).toHaveBeenCalledOnce();
+        rerender(<Toast title="Saved" onDismiss={onDismiss} duration={0} />);
+        act(() => vi.advanceTimersByTime(60_000));
+        expect(onDismiss).toHaveBeenCalledOnce();
+    });
+
+    it('waits while hovered', () => {
+        const onDismiss = vi.fn();
+        render(<Toast title="Saved" onDismiss={onDismiss} duration={1000} />);
+        fireEvent.mouseEnter(screen.getByRole('status'));
+        act(() => vi.advanceTimersByTime(10_000));
+        expect(onDismiss).not.toHaveBeenCalled();
     });
 });
 

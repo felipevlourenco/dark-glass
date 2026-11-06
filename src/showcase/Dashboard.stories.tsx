@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
     Avatar,
     Badge,
@@ -64,7 +64,8 @@ const arrears = [
 function Dashboard() {
     const [paletteOpen, setPaletteOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
-    const [toasts, setToasts] = useState<string[]>([]);
+    const [toasts, setToasts] = useState<{ id: number; message: string }[]>([]);
+    const nextToast = useRef(0);
     const [period, setPeriod] = useState('Year');
     const [filter, setFilter] = useState('All');
     const [reminders, setReminders] = useState(true);
@@ -80,8 +81,10 @@ function Dashboard() {
         return () => document.removeEventListener('keydown', onKey);
     }, []);
 
-    const remind = (home: string) =>
-        setToasts((list) => [...list, `Reminder sent for ${home}`]);
+    const notify = (message: string) =>
+        setToasts((list) => [...list, { id: nextToast.current++, message }]);
+
+    const remind = (home: string) => notify(`Reminder sent for ${home}`);
 
     return (
         <div
@@ -415,10 +418,7 @@ function Dashboard() {
                         <Button
                             onClick={() => {
                                 setModalOpen(false);
-                                setToasts((list) => [
-                                    ...list,
-                                    'Property added',
-                                ]);
+                                notify('Property added');
                             }}
                         >
                             Add property
@@ -467,15 +467,13 @@ function Dashboard() {
             />
 
             <ToastRegion>
-                {toasts.map((message, index) => (
+                {toasts.map(({ id, message }) => (
                     <Toast
-                        key={index}
+                        key={id}
                         tone="positive"
                         title={message}
                         onDismiss={() =>
-                            setToasts((list) =>
-                                list.filter((_, i) => i !== index),
-                            )
+                            setToasts((list) => list.filter((t) => t.id !== id))
                         }
                     />
                 ))}
