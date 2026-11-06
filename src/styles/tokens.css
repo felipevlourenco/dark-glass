@@ -1,0 +1,187 @@
+/* Dark Glass — generated from tokens.json */
+:root, [data-theme="ember"] {
+  --bg: #1a1b1d;
+  --bg-wash: #2b2b27;
+  --glass: #ffffff12;
+  --glass-raised: #ffffff1c;
+  --glass-inset: #ffffff0d;
+  --surface-overlay: #2b2d2af2;
+  --hover: #ffffff14;
+  --selected: #ffffff2e;
+  --scrim: #070807b3;
+  --border: #ffffff1f;
+  --border-strong: #ffffff73;
+  --text: #f4f1ec;
+  --text-muted: #bdbab3;
+  --text-subtle: #aaa7a0;
+  --text-disabled: #ffffff59;
+  --primary: #d63e1e;
+  --primary-hover: #c93719;
+  --primary-pressed: #b02e12;
+  --on-primary: #ffffff;
+  --primary-soft: #d63e1e38;
+  --primary-text: #ff8062;
+  --accent: #f29c21;
+  --accent-soft: #f29c212e;
+  --positive: #4cd078;
+  --positive-soft: #4cd0782e;
+  --warning: #f29c21;
+  --warning-soft: #f29c212e;
+  --danger: #ff9585;
+  --danger-soft: #ff95852e;
+  --info: #7ab4ee;
+  --info-soft: #7ab4ee2e;
+  --inverse: #f4f1ec;
+  --on-inverse: #17181a;
+  --avatar-cream: #ebd4a6;
+  --on-cream: #3a2b12;
+  --focus: #ffa68f;
+  --chart-1: #fa5f32;
+  --chart-2: #4cd078;
+  --chart-3: #d0cec7;
+  --chart-4: #f29c21;
+  --chart-5: #7ab4ee;
+  --shadow-glass: 0 1px 0 #ffffff1f inset, 0 18px 40px -18px #00000099;
+  --shadow-primary: 0 1px 0 #ffffff33 inset, 0 8px 20px -8px #d63e1eb3;
+  --shadow-md: 0 10px 30px -10px #000000a6;
+  --shadow-lg: 0 30px 80px -20px #000000d9, 0 0 0 1px #ffffff14;
+}
+
+[data-theme="ink"] {
+  --bg: #e7e3dc;
+  --bg-wash: #f4f1eb;
+  --glass: #ffffffb3;
+  --glass-raised: #ffffffd9;
+  --glass-inset: #14110f0d;
+  --surface-overlay: #fffffff5;
+  --hover: #14110f0f;
+  --selected: #14110f1f;
+  --scrim: #14110f73;
+  --border: #14110f1a;
+  --border-strong: #14110f99;
+  --text: #14110f;
+  --text-muted: #55514b;
+  --text-subtle: #615d56;
+  --text-disabled: #14110f66;
+  --primary: #1a1816;
+  --primary-hover: #37322d;
+  --primary-pressed: #0b0a09;
+  --on-primary: #faf8f5;
+  --primary-soft: #14110f14;
+  --primary-text: #14110f;
+  --accent: #b0360e;
+  --accent-soft: #b0360e1f;
+  --positive: #136c34;
+  --positive-soft: #136c341f;
+  --warning: #8f5600;
+  --warning-soft: #8f56001f;
+  --danger: #b42318;
+  --danger-soft: #b423181a;
+  --info: #1d5fb8;
+  --info-soft: #1d5fb81a;
+  --inverse: #1a1816;
+  --on-inverse: #faf8f5;
+  --avatar-cream: #ebd4a6;
+  --on-cream: #3a2b12;
+  --focus: #14110f;
+  --chart-1: #1a1816;
+  --chart-2: #b0360e;
+  --chart-3: #8a857d;
+  --chart-4: #136c34;
+  --chart-5: #1d5fb8;
+  --shadow-glass: 0 1px 0 #ffffffcc inset, 0 14px 34px -18px #14110f40;
+  --shadow-primary: 0 1px 0 #ffffff26 inset, 0 8px 20px -10px #14110f80;
+  --shadow-md: 0 10px 30px -12px #14110f4d;
+  --shadow-lg: 0 30px 80px -24px #14110f66, 0 0 0 1px #14110f14;
+}
+
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 26px;
+  --radius-pill: 999px;
+  --blur-sm: 10px;
+  --blur-md: 24px;
+  --blur-lg: 40px;
+  --z-menu: 1000;
+  --z-layer: 1100;
+  --z-toast: 1200;
+  --z-tooltip: 1300;
+  --font-sans: "Outfit", "Avenir Next", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.display {
+  font-family: var(--font-sans);
+  font-size: 32px;
+  line-height: 38px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.metric {
+  font-family: var(--font-sans);
+  font-size: 32px;
+  line-height: 38px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.heading {
+  font-family: var(--font-sans);
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 500;
+}
+
+.title {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.body-sm {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.caption {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.label {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
