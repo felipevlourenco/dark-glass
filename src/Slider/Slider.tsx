@@ -16,7 +16,7 @@ export type SliderProps = {
     defaultValue?: number;
     /** Formats the number shown beside the label, e.g. `(v) => `${v}%``. */
     format?: (value: number) => string;
-    onChange?: (value: number) => void;
+    onValueChange?: (value: number) => void;
 } & Omit<
     InputHTMLAttributes<HTMLInputElement>,
     'onChange' | 'value' | 'defaultValue' | 'type' | 'min' | 'max' | 'step'
@@ -30,7 +30,7 @@ export function Slider({
     value,
     defaultValue,
     format = String,
-    onChange,
+    onValueChange,
     className,
     disabled,
     id,
@@ -69,7 +69,7 @@ export function Slider({
                 onChange={(event) => {
                     const next = Number(event.target.value);
                     setCurrent(next);
-                    onChange?.(next);
+                    onValueChange?.(next);
                 }}
             />
         </div>

@@ -61,5 +61,16 @@ export const States: Story = {
 };
 
 export const WithIcons: Story = {
-    args: { icon: 'plus', iconRight: 'chevron-down' },
+    args: { leadingIcon: 'plus', trailingIcon: 'chevron-down' },
+};
+
+export const FullWidth: Story = {
+    args: { fullWidth: true },
+    decorators: [
+        (Story) => (
+            <div style={{ width: 320 }}>
+                <Story />
+            </div>
+        ),
+    ],
 };

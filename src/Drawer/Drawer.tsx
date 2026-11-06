@@ -10,9 +10,9 @@ export type DrawerProps = {
     onClose?: () => void;
     title: string;
     description?: string;
-    footer?: ReactNode;
+    actions?: ReactNode;
     /** @default 'right' */
-    side?: 'left' | 'right';
+    from?: 'left' | 'right';
     className?: string;
     children?: ReactNode;
 };
@@ -23,8 +23,8 @@ export function Drawer({
     onClose,
     title,
     description,
-    footer,
-    side = 'right',
+    actions,
+    from = 'right',
     className,
     children,
 }: DrawerProps) {
@@ -33,12 +33,12 @@ export function Drawer({
         <Layer
             open={open}
             onClose={onClose}
-            align={side}
+            align={from}
             labelledBy={titleId}
             panelClassName={clsx(
                 'dg-panel',
                 'dg-drawer',
-                `dg-drawer--${side}`,
+                `dg-drawer--${from}`,
                 className,
             )}
         >
@@ -46,7 +46,7 @@ export function Drawer({
                 titleId={titleId}
                 title={title}
                 description={description}
-                footer={footer}
+                actions={actions}
                 onClose={onClose}
                 scroll
             >

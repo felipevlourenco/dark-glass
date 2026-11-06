@@ -28,14 +28,14 @@ export const Danger: Story = {
     },
 };
 export const WithActionAndDismiss: Story = {
-    args: { tone: 'info', action: 'Undo', onClose: () => {} },
+    args: { tone: 'info', action: 'Undo', onDismiss: () => {} },
 };
 
 export const Region: Story = {
     parameters: { layout: 'fullscreen' },
     render: () => (
         <ToastRegion>
-            <Toast tone="positive" title="Rent received" onClose={() => {}} />
+            <Toast tone="positive" title="Rent received" onDismiss={() => {}} />
             <Toast tone="warning" title="1 home is empty" action="View" />
         </ToastRegion>
     ),

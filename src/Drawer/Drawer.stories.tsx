@@ -28,7 +28,7 @@ function Demo(args: React.ComponentProps<typeof Drawer>) {
                 {...args}
                 open={open}
                 onClose={close}
-                footer={
+                actions={
                     <>
                         <Button variant="ghost" onClick={close}>
                             Reset
@@ -47,6 +47,6 @@ function Demo(args: React.ComponentProps<typeof Drawer>) {
 
 export const Right: Story = { render: (args) => <Demo {...args} /> };
 export const Left: Story = {
-    args: { side: 'left' },
+    args: { from: 'left' },
     render: (args) => <Demo {...args} />,
 };

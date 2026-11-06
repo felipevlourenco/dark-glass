@@ -11,29 +11,35 @@ describe('Switch', () => {
     });
 
     it('toggles itself when uncontrolled and reports the new state', async () => {
-        const onChange = vi.fn();
-        render(<Switch label="A" onChange={onChange} />);
+        const onCheckedChange = vi.fn();
+        render(<Switch label="A" onCheckedChange={onCheckedChange} />);
         const toggle = screen.getByRole('switch');
         await userEvent.click(toggle);
         expect(toggle).toHaveAttribute('aria-checked', 'true');
-        expect(onChange).toHaveBeenLastCalledWith(true);
+        expect(onCheckedChange).toHaveBeenLastCalledWith(true);
         await userEvent.click(toggle);
-        expect(onChange).toHaveBeenLastCalledWith(false);
+        expect(onCheckedChange).toHaveBeenLastCalledWith(false);
     });
 
     it('follows `checked` when controlled', async () => {
-        const onChange = vi.fn();
-        render(<Switch label="A" checked={false} onChange={onChange} />);
+        const onCheckedChange = vi.fn();
+        render(
+            <Switch
+                label="A"
+                checked={false}
+                onCheckedChange={onCheckedChange}
+            />,
+        );
         const toggle = screen.getByRole('switch');
         await userEvent.click(toggle);
         expect(toggle).toHaveAttribute('aria-checked', 'false');
-        expect(onChange).toHaveBeenCalledWith(true);
+        expect(onCheckedChange).toHaveBeenCalledWith(true);
     });
 
     it('ignores clicks when disabled', async () => {
-        const onChange = vi.fn();
-        render(<Switch label="A" disabled onChange={onChange} />);
+        const onCheckedChange = vi.fn();
+        render(<Switch label="A" disabled onCheckedChange={onCheckedChange} />);
         await userEvent.click(screen.getByRole('switch'));
-        expect(onChange).not.toHaveBeenCalled();
+        expect(onCheckedChange).not.toHaveBeenCalled();
     });
 });

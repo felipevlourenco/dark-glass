@@ -160,21 +160,20 @@ function Dashboard() {
                                 }}
                             />
                         </div>
-                        <Tooltip label="Notifications">
+                        <Tooltip content="Notifications">
                             <IconButton
                                 icon="bell"
                                 label="Notifications"
                                 badge={3}
                             />
                         </Tooltip>
-                        <Button icon="plus" onClick={() => setModalOpen(true)}>
+                        <Button
+                            leadingIcon="plus"
+                            onClick={() => setModalOpen(true)}
+                        >
                             New
                         </Button>
-                        <Avatar
-                            initials="MS"
-                            name="Marta Silva"
-                            status="online"
-                        />
+                        <Avatar name="Marta Silva" status="online" />
                     </div>
                 </header>
 
@@ -210,7 +209,7 @@ function Dashboard() {
                                 tone="neutral"
                                 options={['Month', 'Year']}
                                 value={period}
-                                onChange={setPeriod}
+                                onValueChange={setPeriod}
                             />
                         </div>
                         <div
@@ -394,7 +393,7 @@ function Dashboard() {
                         <Switch
                             label="Rent reminders"
                             checked={reminders}
-                            onChange={setReminders}
+                            onCheckedChange={setReminders}
                         />
                     </GlassCard>
                 </div>
@@ -405,7 +404,7 @@ function Dashboard() {
                 onClose={() => setModalOpen(false)}
                 title="Add property"
                 description="Add a home to your portfolio."
-                footer={
+                actions={
                     <>
                         <Button
                             variant="ghost"
@@ -473,7 +472,7 @@ function Dashboard() {
                         key={index}
                         tone="positive"
                         title={message}
-                        onClose={() =>
+                        onDismiss={() =>
                             setToasts((list) =>
                                 list.filter((_, i) => i !== index),
                             )
