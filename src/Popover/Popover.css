@@ -1,0 +1,19 @@
+.dg-popover {
+    width: 320px;
+    max-width: calc(100vw - 32px);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+}
+.dg-popover__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+}
+.dg-popover__head h3 {
+    margin: 0;
+}
+.dg-popover__body {
+    color: var(--text);
+}
