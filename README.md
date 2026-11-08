@@ -139,6 +139,10 @@ If you would rather own the list, render `Toast` inside a `ToastRegion` yourself
 - `AreaChart` and `BarChart` show a tooltip on hover, touch and arrow keys. Touch keeps the tooltip until focus moves away.
 - Axe in the test suite runs in jsdom, which cannot compute colour contrast. Contrast is checked for the status colours by a token test, and was checked in a real browser across every story and both themes.
 
+## Stability
+
+From 1.0.0 the public API follows [semantic versioning](https://semver.org): component names, props, exported types and token names change only in a major release. Releases are cut from commit messages (`fix` is a patch, `feat` a minor, a breaking change a major), and each one is listed on the [releases page](https://github.com/felipevlourenco/dark-glass/releases).
+
 ## Tokens
 
 `src/styles/tokens.json` is the source of the design tokens and `src/styles/tokens.css` is generated from it (colours per theme, spacing, radii, shadows, blur, z-index and type styles). Read each token's usage note in the design system before choosing one.
