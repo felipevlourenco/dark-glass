@@ -1,0 +1,21 @@
+.dg-areachart {
+    position: relative;
+}
+.dg-areachart__tip {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 6px 10px;
+    color: var(--text);
+    white-space: nowrap;
+    pointer-events: none;
+    background: var(--surface-overlay);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md);
+    transform: translate(-50%, calc(-100% - 16px));
+}
+.dg-areachart__tip-label {
+    color: var(--text-muted);
+}

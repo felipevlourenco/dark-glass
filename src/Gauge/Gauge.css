@@ -1,0 +1,8 @@
+.dg-gauge__value {
+    fill: var(--text);
+    font: 500 30px var(--font-sans);
+}
+.dg-gauge__caption {
+    fill: var(--text-muted);
+    font: 400 12px var(--font-sans);
+}
