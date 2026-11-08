@@ -63,7 +63,9 @@
     border: 2px solid var(--primary);
     box-shadow: var(--shadow-md);
 }
-.dg-slider.is-disabled {
+/* Dim the control, not the value: the number stays readable. */
+.dg-slider.is-disabled .dg-slider__label,
+.dg-slider.is-disabled input {
     opacity: 0.5;
 }
 .dg-slider.is-disabled input {

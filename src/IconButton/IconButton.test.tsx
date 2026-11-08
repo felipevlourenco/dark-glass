@@ -29,9 +29,22 @@ describe('IconButton', () => {
         );
     });
 
-    it('shows a badge without adding it to the name', () => {
+    it('adds a text or number badge to the accessible name', () => {
         render(<IconButton icon="bell" label="Notifications" badge={3} />);
         expect(screen.getByText('3')).toBeInTheDocument();
+        expect(
+            screen.getByRole('button', { name: 'Notifications, 3' }),
+        ).toBeVisible();
+    });
+
+    it('keeps the plain label for a badge that is not text', () => {
+        render(
+            <IconButton
+                icon="bell"
+                label="Notifications"
+                badge={<i data-testid="dot" />}
+            />,
+        );
         expect(
             screen.getByRole('button', { name: 'Notifications' }),
         ).toBeVisible();
