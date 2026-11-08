@@ -180,3 +180,148 @@ export const menu: MenuItem[] = [
     { type: 'separator' },
     { label: 'Hide card', icon: 'x' },
 ];
+
+export type Listing = {
+    id: string;
+    price: number;
+    name: string;
+    place: string;
+    tags: string[];
+    /** Gross yield in percent. */
+    yield: number;
+    bedrooms: number;
+    bathrooms: number;
+    m2: number;
+    rent: number;
+};
+
+export const listings: Listing[] = [
+    {
+        id: 'a',
+        price: 295000,
+        name: 'Alfama Loft',
+        place: 'Alfama, Lisbon',
+        tags: ['New listing', 'Short-let licence'],
+        yield: 6.0,
+        bedrooms: 1,
+        bathrooms: 1,
+        m2: 62,
+        rent: 1480,
+    },
+    {
+        id: 'b',
+        price: 362000,
+        name: 'Chiado Atelier',
+        place: 'Chiado, Lisbon',
+        tags: ['Quiet street'],
+        yield: 5.0,
+        bedrooms: 1,
+        bathrooms: 1,
+        m2: 58,
+        rent: 1520,
+    },
+    {
+        id: 'c',
+        price: 348000,
+        name: 'Ruzafa Garden Flat',
+        place: 'Ruzafa, Valencia',
+        tags: ['Garden', 'Renovated'],
+        yield: 5.6,
+        bedrooms: 2,
+        bathrooms: 1,
+        m2: 86,
+        rent: 1620,
+    },
+    {
+        id: 'd',
+        price: 535000,
+        name: 'Campo de Ourique Flat',
+        place: 'Campo de Ourique, Lisbon',
+        tags: ['Period building', 'Lift'],
+        yield: 4.6,
+        bedrooms: 2,
+        bathrooms: 1,
+        m2: 92,
+        rent: 2050,
+    },
+    {
+        id: 'e',
+        price: 214000,
+        name: 'Ribeira Studio',
+        place: 'Ribeira, Porto',
+        tags: ['Tenant in place'],
+        yield: 6.4,
+        bedrooms: 0,
+        bathrooms: 1,
+        m2: 38,
+        rent: 1140,
+    },
+    {
+        id: 'f',
+        price: 489000,
+        name: 'Malagueta Penthouse',
+        place: 'Malagueta, Málaga',
+        tags: ['Sea view', 'Terrace'],
+        yield: 5.2,
+        bedrooms: 2,
+        bathrooms: 2,
+        m2: 78,
+        rent: 2120,
+    },
+    {
+        id: 'g',
+        price: 612000,
+        name: 'Cascais Terrace House',
+        place: 'Cascais',
+        tags: ['Parking'],
+        yield: 4.3,
+        bedrooms: 3,
+        bathrooms: 2,
+        m2: 110,
+        rent: 2190,
+    },
+    {
+        id: 'h',
+        price: 426000,
+        name: 'Graça Duplex',
+        place: 'Graça, Lisbon',
+        tags: ['New listing', 'Duplex'],
+        yield: 4.9,
+        bedrooms: 2,
+        bathrooms: 1,
+        m2: 74,
+        rent: 1740,
+    },
+];
+
+/** Price at the top of the slider: "any price". */
+export const ANY_PRICE = 700000;
+
+export type ListingFilter = {
+    /** Matches name or place, ignoring case. */
+    query: string;
+    /** Part of the place name, or `all`. */
+    city: string;
+    /** Highest price; `ANY_PRICE` means no limit. */
+    maxPrice: number;
+    /** Lowest gross yield in percent. */
+    minYield: number;
+    sort: 'newest' | 'price' | 'yield';
+};
+
+export function filterListings(all: Listing[], f: ListingFilter): Listing[] {
+    const q = f.query.trim().toLowerCase();
+    const shown = all.filter(
+        (l) =>
+            (f.maxPrice >= ANY_PRICE || l.price <= f.maxPrice) &&
+            l.yield >= f.minYield &&
+            (f.city === 'all' || l.place.includes(f.city)) &&
+            (!q || `${l.name} ${l.place}`.toLowerCase().includes(q)),
+    );
+    if (f.sort === 'price') return shown.sort((a, b) => a.price - b.price);
+    if (f.sort === 'yield') return shown.sort((a, b) => b.yield - a.yield);
+    return shown;
+}
+
+export const facts = (l: Listing) =>
+    `${l.bedrooms ? `${l.bedrooms} bd` : 'Studio'} · ${l.bathrooms} ba · ${l.m2} m²`;

@@ -93,14 +93,14 @@ body {
 
 ## Components
 
-| Group     | Components                                                                                                                                                                                   |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Display   | `GlassCard`, `Icon`, `Badge`, `Chip`, `Avatar`, `Kbd`, `Progress`                                                                                                                            |
-| Actions   | `Button`, `IconButton`, `NavItem`                                                                                                                                                            |
-| Forms     | `Input`, `Select`, `Slider`, `Switch`, `SegmentedControl`                                                                                                                                    |
-| Overlays  | `Modal`, `Drawer`, `CommandPalette`, `DropdownMenu`, `Popover`, `Tooltip`, `Toast` and `ToastRegion`                                                                                         |
-| Dashboard | `AreaChart`, `BarChart`, `Gauge`, `StatTile`, `CardMenu`, `CardHeader`, `PortfolioValueCard`, `NeedsYouTodayCard`, `AttentionRow`, `LoanRepaymentsCard`, `WhereItSitsCard`, `PropertiesCard` |
-| Layout    | `Sidebar`, `TopBar`, `PageHeader`                                                                                                                                                            |
+| Group     | Components                                                                                                                                                                                                  |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Display   | `GlassCard`, `Icon`, `Badge`, `Chip`, `Avatar`, `Kbd`, `Progress`                                                                                                                                           |
+| Actions   | `Button`, `IconButton`, `NavItem`                                                                                                                                                                           |
+| Forms     | `Input`, `Select`, `Slider`, `Switch`, `SegmentedControl`                                                                                                                                                   |
+| Overlays  | `Modal`, `Drawer`, `CommandPalette`, `DropdownMenu`, `Popover`, `Tooltip`, `Toast` and `ToastRegion`                                                                                                        |
+| Dashboard | `AreaChart`, `BarChart`, `Gauge`, `StatTile`, `CardMenu`, `CardHeader`, `PortfolioValueCard`, `NeedsYouTodayCard`, `AttentionRow`, `LoanRepaymentsCard`, `WhereItSitsCard`, `PropertiesCard`, `ListingCard` |
+| Layout    | `Sidebar`, `TopBar`, `PageHeader`                                                                                                                                                                           |
 
 Every component is documented with live examples and props in Storybook.
 

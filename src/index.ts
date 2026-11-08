@@ -87,3 +87,4 @@ export {
     type SidebarProps,
 } from './Sidebar/Sidebar';
 export { TopBar, type TopBarProps } from './TopBar/TopBar';
+export { ListingCard, type ListingCardProps } from './ListingCard/ListingCard';
