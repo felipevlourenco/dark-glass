@@ -8,6 +8,9 @@
         "url": "git+https://github.com/felipevlourenco/dark-glass.git"
     },
     "homepage": "https://felipevlourenco.github.io/dark-glass/",
+    "bugs": {
+        "url": "https://github.com/felipevlourenco/dark-glass/issues"
+    },
     "description": "A React component library and dashboard kit: frosted glass panels, pill controls, two themes.",
     "keywords": [
         "react",
