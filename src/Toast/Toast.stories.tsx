@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useRef, useState } from 'react';
 import { Button } from '../Button/Button';
 import { Toast, ToastRegion } from './Toast';
+import { ToastProvider } from './ToastProvider';
+import { useToasts } from './useToasts';
 
 const meta = {
     title: 'Components/Toast',
@@ -73,4 +75,40 @@ function AutoDismissDemo() {
 
 export const AutoDismiss: Story = {
     render: () => <AutoDismissDemo />,
+};
+
+function QueueDemo() {
+    const { toast } = useToasts();
+    const count = useRef(0);
+    return (
+        <Button
+            onClick={() =>
+                toast({
+                    tone: 'info',
+                    title: `Toast ${++count.current}`,
+                    description: 'Only three show at once.',
+                })
+            }
+        >
+            Add a toast
+        </Button>
+    );
+}
+
+export const Queue: Story = {
+    parameters: {
+        layout: 'fullscreen',
+        docs: {
+            description: {
+                story: '`ToastProvider` keeps the list for you. Click fast: past three, toasts wait and their timers start when they appear.',
+            },
+        },
+    },
+    render: () => (
+        <ToastProvider limit={3}>
+            <div style={{ padding: 24 }}>
+                <QueueDemo />
+            </div>
+        </ToastProvider>
+    ),
 };

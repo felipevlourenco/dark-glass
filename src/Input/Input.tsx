@@ -1,4 +1,4 @@
-import { useId, type InputHTMLAttributes } from 'react';
+import { useId, type InputHTMLAttributes, forwardRef } from 'react';
 import { Field } from '../Field/Field';
 import { renderIcon } from '../Icon/renderIcon';
 import type { IconName } from '../Icon/icons';
@@ -17,17 +17,10 @@ export type InputProps = {
     kbd?: string;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-export function Input({
-    label,
-    hint,
-    error,
-    icon,
-    kbd,
-    className,
-    id,
-    disabled,
-    ...props
-}: InputProps) {
+export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
+    { label, hint, error, icon, kbd, className, id, disabled, ...props },
+    ref,
+) {
     const uid = useId();
     const inputId = id ?? uid;
     return (
@@ -47,6 +40,7 @@ export function Input({
                 {icon ? renderIcon(icon, 16) : null}
                 <input
                     {...props}
+                    ref={ref}
                     id={inputId}
                     className="body-sm"
                     disabled={disabled}
@@ -59,4 +53,4 @@ export function Input({
             </div>
         </Field>
     );
-}
+});

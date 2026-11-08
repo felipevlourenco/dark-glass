@@ -21,14 +21,47 @@ const opposite = {
     end: 'start',
 } as const;
 
+type Bounds = { top: number; left: number; right: number; bottom: number };
+
+/** The viewport, narrowed by every ancestor that clips its contents. */
+function visibleBounds(el: HTMLElement): Bounds {
+    const bounds = {
+        top: 0,
+        left: 0,
+        right: window.innerWidth,
+        bottom: window.innerHeight,
+    };
+    for (
+        let p = el.parentElement;
+        p && p !== document.body;
+        p = p.parentElement
+    ) {
+        const { overflowX, overflowY } = getComputedStyle(p);
+        if (!/auto|scroll|hidden|clip/.test(overflowX + overflowY)) continue;
+        const box = p.getBoundingClientRect();
+        // No size means no layout (or a hidden box): it says nothing about room.
+        if (!box.width && !box.height) continue;
+        bounds.top = Math.max(bounds.top, box.top);
+        bounds.left = Math.max(bounds.left, box.left);
+        bounds.right = Math.min(bounds.right, box.right);
+        bounds.bottom = Math.min(bounds.bottom, box.bottom);
+    }
+    return bounds;
+}
+
 /**
- * Where a panel should sit so it stays on screen. It keeps the preferred side
+ * Where a panel should sit so it stays visible. It keeps the preferred side
+ * unless the panel does not fit there and there is more room on the other, so
+ * it never flips to a side that is worse. Room is the viewport narrowed by any
+ * ancestor that clips (`overflow` other than visible). It keeps the preferred side
  * unless the panel does not fit there and there is more room on the other, so
  * it never flips to a side that is worse.
  *
- * ponytail: measured when the panel opens and on window resize, not on scroll, and it
- * only checks the viewport, not scroll containers that clip. Reach for
- * floating-ui if either matters.
+ * It measures when the panel opens, on resize and on scroll of the window or
+ * any scroll container.
+ *
+ * ponytail: it only picks a side, it does not shift or resize the panel to fit
+ * a space that is too small on both sides. Reach for floating-ui for that.
  */
 export function useFlip({
     open,
@@ -49,16 +82,17 @@ export function useFlip({
             // Nothing to measure (not laid out yet, or no layout engine): keep the preference.
             if (!width && !height) return;
 
-            const below = window.innerHeight - at.bottom - GAP;
-            const above = at.top - GAP;
+            const room = visibleBounds(trigger);
+            const below = room.bottom - at.bottom - GAP;
+            const above = at.top - room.top - GAP;
             const v =
                 vertical === 'bottom'
                     ? height > below && above > below
                     : height > above && below > above;
 
             // `start` grows rightwards from the trigger's left edge, `end` leftwards.
-            const fromStart = window.innerWidth - at.left;
-            const fromEnd = at.right;
+            const fromStart = room.right - at.left;
+            const fromEnd = at.right - room.left;
             const h =
                 horizontal === 'start'
                     ? width > fromStart && fromEnd > fromStart
@@ -72,7 +106,12 @@ export function useFlip({
         };
         measure();
         window.addEventListener('resize', measure);
-        return () => window.removeEventListener('resize', measure);
+        // Capture: scroll does not bubble, and the scroller may be any ancestor.
+        window.addEventListener('scroll', measure, true);
+        return () => {
+            window.removeEventListener('resize', measure);
+            window.removeEventListener('scroll', measure, true);
+        };
     }, [open, vertical, horizontal, anchor, panel]);
 
     return {

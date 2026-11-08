@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { renderIcon } from '../Icon/renderIcon';
 import type { IconName } from '../Icon/icons';
 import { clsx } from '../utils/clsx';
@@ -19,41 +19,47 @@ export type ButtonProps = {
     loading?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function Button({
-    variant = 'primary',
-    size = 'medium',
-    leadingIcon,
-    trailingIcon,
-    fullWidth = false,
-    loading = false,
-    className,
-    children,
-    type = 'button',
-    disabled,
-    ...props
-}: ButtonProps) {
-    return (
-        <button
-            {...props}
-            type={type}
-            className={clsx(
-                'dg-btn',
-                'label',
-                `dg-btn--${variant}`,
-                `dg-btn--${size}`,
-                { 'is-loading': loading, 'dg-btn--full': fullWidth },
-                className,
-            )}
-            disabled={disabled || loading}
-            aria-busy={loading || undefined}
-        >
-            {loading ? (
-                <span className="dg-btn__spinner" aria-hidden="true" />
-            ) : (
-                renderIcon(leadingIcon, size === 'small' ? 14 : 16)
-            )}
-            {children}
-            {renderIcon(trailingIcon, size === 'small' ? 14 : 16)}
-        </button>
-    );
-}
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+    function Button(
+        {
+            variant = 'primary',
+            size = 'medium',
+            leadingIcon,
+            trailingIcon,
+            fullWidth = false,
+            loading = false,
+            className,
+            children,
+            type = 'button',
+            disabled,
+            ...props
+        },
+        ref,
+    ) {
+        return (
+            <button
+                {...props}
+                ref={ref}
+                type={type}
+                className={clsx(
+                    'dg-btn',
+                    'label',
+                    `dg-btn--${variant}`,
+                    `dg-btn--${size}`,
+                    { 'is-loading': loading, 'dg-btn--full': fullWidth },
+                    className,
+                )}
+                disabled={disabled || loading}
+                aria-busy={loading || undefined}
+            >
+                {loading ? (
+                    <span className="dg-btn__spinner" aria-hidden="true" />
+                ) : (
+                    renderIcon(leadingIcon, size === 'small' ? 14 : 16)
+                )}
+                {children}
+                {renderIcon(trailingIcon, size === 'small' ? 14 : 16)}
+            </button>
+        );
+    },
+);
