@@ -1,0 +1,15 @@
+.dg-card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+}
+.dg-card-head__description {
+    color: var(--text-muted);
+}
+.dg-card-head__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}

@@ -1,0 +1,48 @@
+.dg-attention {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 0;
+    padding: 10px 0;
+}
+.dg-attention + .dg-attention {
+    border-top: 1px solid var(--border);
+}
+.dg-attention__text {
+    flex: 1;
+    min-width: 0;
+}
+.dg-attention__text > div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.dg-attention__description {
+    color: var(--text-muted);
+}
+.dg-attention__tile {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    color: var(--text);
+    background: var(--glass-raised);
+    border-radius: var(--radius-sm);
+}
+.dg-attention__tile--positive {
+    color: var(--positive);
+    background: var(--positive-soft);
+}
+.dg-attention__tile--warning {
+    color: var(--warning);
+    background: var(--warning-soft);
+}
+.dg-attention__tile--danger {
+    color: var(--danger);
+    background: var(--danger-soft);
+}
+.dg-attention__tile--info {
+    color: var(--info);
+    background: var(--info-soft);
+}

@@ -55,4 +55,12 @@ describe('PortfolioValueCard', () => {
             screen.queryByRole('button', { name: 'More options' }),
         ).not.toBeInTheDocument();
     });
+
+    it('starts on defaultRange', () => {
+        render(
+            <PortfolioValueCard value="x" ranges={ranges} defaultRange="1Y" />,
+        );
+        expect(screen.getByRole('radio', { name: '1Y' })).toBeChecked();
+        expect(screen.getByText('since Nov')).toBeInTheDocument();
+    });
 });

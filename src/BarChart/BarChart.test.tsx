@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { BarChart } from './BarChart';
 
 const rows = [
@@ -39,5 +39,41 @@ describe('BarChart', () => {
         );
         const bar = container.querySelector('[data-part="part"]')!;
         expect(Number(bar.getAttribute('height'))).toBeGreaterThanOrEqual(4);
+    });
+
+    describe('hover', () => {
+        const setup = () => {
+            const view = render(
+                <BarChart rows={rows} label="R" formatValue={(v) => `€${v}`} />,
+            );
+            const svg = screen.getByRole('img', { name: 'R' });
+            // 560 viewBox units drawn at 560px: clientX equals viewBox x.
+            svg.getBoundingClientRect = () =>
+                ({ left: 0, width: 560 }) as DOMRect;
+            return { ...view, svg };
+        };
+        const tip = (c: HTMLElement) =>
+            c.querySelector('[data-part="tooltip"]');
+
+        it('shows the row under the pointer with its part and total', () => {
+            const { container, svg } = setup();
+            expect(tip(container)).toBeNull();
+            fireEvent.pointerMove(svg, { clientX: 100 }); // first slot
+            expect(tip(container)).toHaveTextContent('Apr');
+            expect(tip(container)).toHaveTextContent('€1710 of €4180');
+            expect(container.querySelectorAll('[data-active]')).toHaveLength(1);
+            fireEvent.pointerMove(svg, { clientX: 5000 }); // clamps to last
+            expect(tip(container)).toHaveTextContent('May');
+            fireEvent.pointerLeave(svg);
+            expect(tip(container)).toBeNull();
+        });
+
+        it('moves with the arrow keys', () => {
+            const { container, svg } = setup();
+            fireEvent.focus(svg);
+            expect(tip(container)).toHaveTextContent('May');
+            fireEvent.keyDown(svg, { key: 'ArrowLeft' });
+            expect(tip(container)).toHaveTextContent('Apr');
+        });
     });
 });

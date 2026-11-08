@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { AreaChart } from '../AreaChart/AreaChart';
 import { Badge } from '../Badge/Badge';
+import { CardHeader } from '../CardHeader/CardHeader';
 import { CardMenu } from '../CardMenu/CardMenu';
 import type { MenuItem } from '../DropdownMenu/DropdownMenu';
 import { GlassCard } from '../GlassCard/GlassCard';
@@ -30,6 +31,8 @@ export type PortfolioValueCardProps = {
     ranges: PortfolioValueRange[];
     /** Selected range id. Defaults to the first range. */
     range?: string;
+    /** Range id to start on when uncontrolled. Defaults to the first. */
+    defaultRange?: string;
     onRangeChange?: (id: string) => void;
     /** Y-axis tick text. */
     formatTick?: (value: number) => string;
@@ -48,13 +51,17 @@ export function PortfolioValueCard({
     value,
     ranges,
     range,
+    defaultRange,
     onRangeChange,
     formatTick,
     formatValue,
     stats = [],
     menu,
 }: PortfolioValueCardProps) {
-    const [selected, setSelected] = useControlled(range, ranges[0]?.id);
+    const [selected, setSelected] = useControlled(
+        range,
+        defaultRange ?? ranges[0]?.id,
+    );
     const current = ranges.find((r) => r.id === selected) ?? ranges[0];
     if (!current) return null;
     const { data } = current;
@@ -62,32 +69,28 @@ export function PortfolioValueCard({
 
     return (
         <GlassCard className="dg-portfolio">
-            <div className="dg-portfolio__head">
-                <div>
-                    <div className="title">{title}</div>
-                    {description ? (
-                        <div className="caption dg-portfolio__muted">
-                            {description}
-                        </div>
-                    ) : null}
-                </div>
-                <div className="dg-portfolio__controls">
-                    {ranges.length > 1 ? (
-                        <SegmentedControl
-                            label="Range"
-                            tone="neutral"
-                            size="small"
-                            options={ranges.map((r) => r.id)}
-                            value={current.id}
-                            onValueChange={(id) => {
-                                setSelected(id);
-                                onRangeChange?.(id);
-                            }}
-                        />
-                    ) : null}
-                    {menu ? <CardMenu items={menu} /> : null}
-                </div>
-            </div>
+            <CardHeader
+                title={title}
+                description={description}
+                actions={
+                    <>
+                        {ranges.length > 1 ? (
+                            <SegmentedControl
+                                label="Range"
+                                tone="neutral"
+                                size="small"
+                                options={ranges.map((r) => r.id)}
+                                value={current.id}
+                                onValueChange={(id) => {
+                                    setSelected(id);
+                                    onRangeChange?.(id);
+                                }}
+                            />
+                        ) : null}
+                        {menu ? <CardMenu items={menu} /> : null}
+                    </>
+                }
+            />
             <div className="dg-portfolio__metric">
                 <span className="metric">{value}</span>
                 <Badge

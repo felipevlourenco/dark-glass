@@ -1,0 +1,16 @@
+.dg-property {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 10px 0;
+}
+.dg-property + .dg-property {
+    border-top: 1px solid var(--border);
+}
+.dg-property__text {
+    flex: 1;
+    min-width: 0;
+}
+.dg-property__description {
+    color: var(--text-muted);
+}

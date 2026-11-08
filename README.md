@@ -93,13 +93,14 @@ body {
 
 ## Components
 
-| Group     | Components                                                                                           |
-| --------- | ---------------------------------------------------------------------------------------------------- |
-| Display   | `GlassCard`, `Icon`, `Badge`, `Chip`, `Avatar`, `Kbd`, `Progress`                                    |
-| Actions   | `Button`, `IconButton`, `NavItem`                                                                    |
-| Forms     | `Input`, `Select`, `Slider`, `Switch`, `SegmentedControl`                                            |
-| Overlays  | `Modal`, `Drawer`, `CommandPalette`, `DropdownMenu`, `Popover`, `Tooltip`, `Toast` and `ToastRegion` |
-| Dashboard | `AreaChart`, `BarChart`, `Gauge`, `StatTile`, `CardMenu`, `PortfolioValueCard`                       |
+| Group     | Components                                                                                                                                                                                   |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Display   | `GlassCard`, `Icon`, `Badge`, `Chip`, `Avatar`, `Kbd`, `Progress`                                                                                                                            |
+| Actions   | `Button`, `IconButton`, `NavItem`                                                                                                                                                            |
+| Forms     | `Input`, `Select`, `Slider`, `Switch`, `SegmentedControl`                                                                                                                                    |
+| Overlays  | `Modal`, `Drawer`, `CommandPalette`, `DropdownMenu`, `Popover`, `Tooltip`, `Toast` and `ToastRegion`                                                                                         |
+| Dashboard | `AreaChart`, `BarChart`, `Gauge`, `StatTile`, `CardMenu`, `CardHeader`, `PortfolioValueCard`, `NeedsYouTodayCard`, `AttentionRow`, `LoanRepaymentsCard`, `WhereItSitsCard`, `PropertiesCard` |
+| Layout    | `Sidebar`, `TopBar`, `PageHeader`                                                                                                                                                            |
 
 Every component is documented with live examples and props in Storybook.
 
@@ -107,6 +108,7 @@ Every component is documented with live examples and props in Storybook.
 
 - `DropdownMenu`, `Popover` and `Tooltip` flip to the other side when they would run off the screen. They check the viewport when they open, not on scroll or resize, and they ignore scroll containers that clip.
 - `Toast` dismisses itself after `duration` ms (5 s by default, paused while hovered or focused), but there is no toast queue: you decide which toasts render.
+- `AreaChart` and `BarChart` show a tooltip on hover, touch and arrow keys. Touch keeps the tooltip until focus moves away.
 - Inputs do not forward `ref` yet (the library supports React 18).
 
 ## Tokens

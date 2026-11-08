@@ -1,0 +1,18 @@
+.dg-page-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+}
+.dg-page-head__title {
+    margin: 0;
+}
+.dg-page-head__description {
+    margin-top: var(--space-1);
+    color: var(--text-muted);
+}
+.dg-page-head__actions {
+    display: flex;
+    gap: 10px;
+}
