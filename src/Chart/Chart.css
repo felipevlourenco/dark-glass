@@ -1,0 +1,13 @@
+.dg-chart {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.dg-chart__axis {
+    fill: var(--text-subtle);
+    font: 400 11px var(--font-sans);
+}
+.dg-chart__grid {
+    stroke: var(--border);
+    stroke-width: 1;
+}

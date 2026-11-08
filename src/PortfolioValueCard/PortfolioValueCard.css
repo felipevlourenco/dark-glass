@@ -1,0 +1,28 @@
+.dg-portfolio__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+}
+.dg-portfolio__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+.dg-portfolio__muted {
+    color: var(--text-muted);
+}
+.dg-portfolio__metric {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 6px 0 var(--space-2);
+}
+.dg-portfolio__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+}

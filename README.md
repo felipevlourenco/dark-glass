@@ -93,12 +93,13 @@ body {
 
 ## Components
 
-| Group    | Components                                                                                           |
-| -------- | ---------------------------------------------------------------------------------------------------- |
-| Display  | `GlassCard`, `Icon`, `Badge`, `Chip`, `Avatar`, `Kbd`, `Progress`                                    |
-| Actions  | `Button`, `IconButton`, `NavItem`                                                                    |
-| Forms    | `Input`, `Select`, `Slider`, `Switch`, `SegmentedControl`                                            |
-| Overlays | `Modal`, `Drawer`, `CommandPalette`, `DropdownMenu`, `Popover`, `Tooltip`, `Toast` and `ToastRegion` |
+| Group     | Components                                                                                           |
+| --------- | ---------------------------------------------------------------------------------------------------- |
+| Display   | `GlassCard`, `Icon`, `Badge`, `Chip`, `Avatar`, `Kbd`, `Progress`                                    |
+| Actions   | `Button`, `IconButton`, `NavItem`                                                                    |
+| Forms     | `Input`, `Select`, `Slider`, `Switch`, `SegmentedControl`                                            |
+| Overlays  | `Modal`, `Drawer`, `CommandPalette`, `DropdownMenu`, `Popover`, `Tooltip`, `Toast` and `ToastRegion` |
+| Dashboard | `AreaChart`, `BarChart`, `Gauge`, `StatTile`, `CardMenu`, `PortfolioValueCard`                       |
 
 Every component is documented with live examples and props in Storybook.
 
