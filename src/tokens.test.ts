@@ -70,3 +70,23 @@ describe('status colours', () => {
         },
     );
 });
+
+describe('tokens.json and tokens.css', () => {
+    it('agree on every colour, in both themes', () => {
+        const json = JSON.parse(readFileSync('src/styles/tokens.json', 'utf8'));
+        const mismatches: string[] = [];
+        for (const token of json.color.tokens) {
+            for (const [name, value] of Object.entries(token.value)) {
+                const block = css.slice(css.indexOf(`[data-theme='${name}']`));
+                const found = block
+                    .slice(0, block.indexOf('}'))
+                    .match(new RegExp(`--${token.name}: ([^;]+);`))?.[1];
+                if (found?.toLowerCase() !== String(value).toLowerCase())
+                    mismatches.push(
+                        `${name} ${token.name}: ${found} vs ${value}`,
+                    );
+            }
+        }
+        expect(mismatches).toEqual([]);
+    });
+});

@@ -120,4 +120,63 @@ describe('useFlip', () => {
         });
         expect(result()).toBe('top-none');
     });
+
+    it('measures again when the page scrolls', () => {
+        let top = 100;
+        vi.stubGlobal('innerWidth', 1024);
+        vi.stubGlobal('innerHeight', 768);
+        vi.spyOn(
+            HTMLElement.prototype,
+            'getBoundingClientRect',
+        ).mockImplementation(function (this: HTMLElement) {
+            const box = this.matches('.dg-pop')
+                ? { left: 100, top, width: 80, height: 40 }
+                : this.matches('[role="dialog"]')
+                  ? { left: 0, top: 0, ...panel }
+                  : { left: 0, top: 0, width: 0, height: 0 };
+            return {
+                ...box,
+                right: box.left + box.width,
+                bottom: box.top + box.height,
+            } as DOMRect;
+        });
+        render(<Demo vertical="bottom" />);
+        expect(result()).toBe('bottom-none');
+        top = 700; // the trigger scrolled towards the bottom edge
+        act(() => {
+            window.dispatchEvent(new Event('scroll'));
+        });
+        expect(result()).toBe('top-none');
+    });
+
+    it('counts a clipping ancestor as the edge of the room', () => {
+        vi.stubGlobal('innerWidth', 1024);
+        vi.stubGlobal('innerHeight', 768);
+        vi.spyOn(
+            HTMLElement.prototype,
+            'getBoundingClientRect',
+        ).mockImplementation(function (this: HTMLElement) {
+            // A 400px-high scroller starting at the top; the trigger sits
+            // near its bottom, though far from the bottom of the screen.
+            const box = this.matches('.scroller')
+                ? { left: 0, top: 0, width: 600, height: 400 }
+                : this.matches('.dg-pop')
+                  ? { left: 100, top: 300, width: 80, height: 40 }
+                  : this.matches('[role="dialog"]')
+                    ? { left: 0, top: 0, ...panel }
+                    : { left: 0, top: 0, width: 0, height: 0 };
+            return {
+                ...box,
+                right: box.left + box.width,
+                bottom: box.top + box.height,
+            } as DOMRect;
+        });
+        render(
+            <div className="scroller" style={{ overflow: 'auto' }}>
+                <Demo vertical="bottom" />
+            </div>,
+        );
+        // 300px panel: no room below inside the scroller (52px), more above.
+        expect(result()).toBe('top-none');
+    });
 });

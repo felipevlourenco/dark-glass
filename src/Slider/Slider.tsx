@@ -1,4 +1,9 @@
-import { useId, type CSSProperties, type InputHTMLAttributes } from 'react';
+import {
+    useId,
+    type CSSProperties,
+    type InputHTMLAttributes,
+    forwardRef,
+} from 'react';
 import { useControlled } from '../hooks/useControlled';
 import { clsx } from '../utils/clsx';
 import './Slider.css';
@@ -22,20 +27,23 @@ export type SliderProps = {
     'onChange' | 'value' | 'defaultValue' | 'type' | 'min' | 'max' | 'step'
 >;
 
-export function Slider({
-    label,
-    min = 0,
-    max = 100,
-    step = 1,
-    value,
-    defaultValue,
-    format = String,
-    onValueChange,
-    className,
-    disabled,
-    id,
-    ...props
-}: SliderProps) {
+export const Slider = forwardRef<HTMLInputElement, SliderProps>(function Slider(
+    {
+        label,
+        min = 0,
+        max = 100,
+        step = 1,
+        value,
+        defaultValue,
+        format = String,
+        onValueChange,
+        className,
+        disabled,
+        id,
+        ...props
+    },
+    ref,
+) {
     const uid = useId();
     const inputId = id ?? uid;
     const [current, setCurrent] = useControlled(value, defaultValue ?? min);
@@ -58,6 +66,7 @@ export function Slider({
             </div>
             <input
                 {...props}
+                ref={ref}
                 id={inputId}
                 type="range"
                 min={min}
@@ -74,4 +83,4 @@ export function Slider({
             />
         </div>
     );
-}
+});

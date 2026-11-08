@@ -1,0 +1,54 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# Dark Glass
+
+A React component library for dashboards, in frosted glass. Two themes, **Ember**
+(dark glass with an orange primary) and **Ink** (light glass with a near-black
+primary), come from one set of design tokens.
+
+## Start here
+
+- **Components**: every component has live examples and a props table.
+- **Charts** (`AreaChart`, `BarChart`, `Gauge`): drawn with tokens only, with a
+  tooltip on hover, touch and arrow keys.
+- **Showcase**: whole pages built from library parts.
+    - _Dashboard_: a first screen that uses most of the library.
+    - _InvestorDesk_: the desk, with sidebar, top bar and cards.
+    - _Market_: filters, a shortlist and listing cards.
+    - _Calculators_: a mortgage and a rental yield calculator.
+
+Use the **theme** switch in the toolbar to flip between Ember and Ink.
+
+## Set up in your app
+
+```tsx
+import { Button, GlassCard, ToastProvider } from 'dark-glass';
+
+export function App() {
+    return (
+        <ToastProvider>
+            <GlassCard>
+                <Button>Add property</Button>
+            </GlassCard>
+        </ToastProvider>
+    );
+}
+```
+
+Set `data-theme="ember"` or `"ink"` on `<html>`, load the Outfit font, and put a
+soft wash behind glass panels: it blurs what is behind it, so flat black looks
+dead. The README has the details.
+
+## Good to know
+
+- **Toasts**: wrap the app in `ToastProvider` and call `useToasts().toast(...)`.
+  Only three show at once and the rest wait their turn.
+- **Overlays** (`DropdownMenu`, `Popover`, `Tooltip`) flip to the side with more
+  room, using the viewport and any clipping scroll container, and re-measure on
+  scroll.
+- **Refs** reach the native element on `Button`, `IconButton`, `Input`, `Select`,
+  `Slider` and `Switch`.
+- **Accessibility**: every story is checked with axe for WCAG A and AA in the
+  test suite, and status colours are checked for contrast in both themes.
