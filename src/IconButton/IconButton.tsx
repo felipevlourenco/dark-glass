@@ -12,7 +12,7 @@ export type IconButtonProps = {
     variant?: 'primary' | 'secondary' | 'ghost';
     /** @default 'medium' */
     size?: 'small' | 'medium';
-    /** A small count bubble, such as unread notifications. */
+    /** A small count bubble, such as unread notifications. A string or number is added to the accessible name. */
     badge?: ReactNode;
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'aria-label'>;
 
@@ -26,12 +26,17 @@ export function IconButton({
     type = 'button',
     ...props
 }: IconButtonProps) {
+    // The badge text is visible, so it belongs in the accessible name too.
+    const name =
+        typeof badge === 'string' || typeof badge === 'number'
+            ? `${label}, ${badge}`
+            : label;
     return (
         <button
             title={label}
             {...props}
             type={type}
-            aria-label={label}
+            aria-label={name}
             className={clsx(
                 'dg-iconbtn',
                 `dg-iconbtn--${variant}`,
