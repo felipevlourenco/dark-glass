@@ -141,7 +141,9 @@ If you would rather own the list, render `Toast` inside a `ToastRegion` yourself
 
 ## Stability
 
-From 1.0.0 the public API follows [semantic versioning](https://semver.org): component names, props, exported types and token names change only in a major release. Releases are cut from commit messages (`fix` is a patch, `feat` a minor, a breaking change a major), and each one is listed on the [releases page](https://github.com/felipevlourenco/dark-glass/releases).
+From 1.0 the public API follows [semantic versioning](https://semver.org): component names, props, exported types and token names change only in a major release. Releases are cut from commit messages (`fix` is a patch, `feat` a minor, a breaking change a major), and each one is listed on the [releases page](https://github.com/felipevlourenco/dark-glass/releases).
+
+The first stable release on npm is **1.0.1**. The 1.0.0 number was published and withdrawn while the package was being set up, and npm never lets a version number be reused, so `v1.0.0` exists only as a git tag.
 
 ## Tokens
 
