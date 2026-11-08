@@ -72,7 +72,7 @@ describe('AreaChart', () => {
         it('highlights the nearest point and shows its label and value', () => {
             const { container, svg } = setup();
             // x of the 2nd point: 56 + (640 - 56 - 12) / 3.
-            fireEvent.mouseMove(svg, { clientX: 250 });
+            fireEvent.pointerMove(svg, { clientX: 250 });
             const tip = container.querySelector('[data-part="tooltip"]')!;
             expect(tip).toHaveTextContent('Sep');
             expect(tip).toHaveTextContent('€5100000');
@@ -83,27 +83,56 @@ describe('AreaChart', () => {
 
         it('clamps to the ends and goes away on leave', () => {
             const { container, svg } = setup();
-            fireEvent.mouseMove(svg, { clientX: 0 });
+            fireEvent.pointerMove(svg, { clientX: 0 });
             expect(
                 container.querySelector('[data-part="tooltip"]'),
             ).toHaveTextContent('€5080000');
-            fireEvent.mouseMove(svg, { clientX: 9999 });
+            fireEvent.pointerMove(svg, { clientX: 9999 });
             expect(
                 container.querySelector('[data-part="tooltip"]'),
             ).toHaveTextContent('€5165000');
-            fireEvent.mouseLeave(svg);
+            fireEvent.pointerLeave(svg);
             expect(container.querySelector('[data-part="tooltip"]')).toBeNull();
         });
 
-        it('falls back to formatTick for the value and still calls onMouseMove', () => {
-            const onMouseMove = vi.fn();
+        it('keeps the tooltip after a touch ends and drops it on blur', () => {
+            const { container, svg } = setup();
+            fireEvent.pointerMove(svg, { clientX: 250, pointerType: 'touch' });
+            fireEvent.pointerLeave(svg, { pointerType: 'touch' });
+            expect(
+                container.querySelector('[data-part="tooltip"]'),
+            ).toBeInTheDocument();
+            fireEvent.blur(svg);
+            expect(container.querySelector('[data-part="tooltip"]')).toBeNull();
+        });
+
+        it('can be driven with the keyboard and announces the point', () => {
+            const { container, svg } = setup();
+            const tip = () => container.querySelector('[data-part="tooltip"]');
+            fireEvent.focus(svg);
+            expect(tip()).toHaveTextContent('€5165000');
+            fireEvent.keyDown(svg, { key: 'ArrowLeft' });
+            expect(tip()).toHaveTextContent('Oct');
+            expect(container.querySelector('[aria-live]')).toHaveTextContent(
+                'Oct: €5120000',
+            );
+            fireEvent.keyDown(svg, { key: 'Home' });
+            expect(tip()).toHaveTextContent('Aug');
+            fireEvent.keyDown(svg, { key: 'ArrowLeft' });
+            expect(tip()).toHaveTextContent('Aug');
+            fireEvent.keyDown(svg, { key: 'Escape' });
+            expect(tip()).toBeNull();
+        });
+
+        it('falls back to formatTick for the value and still calls onPointerMove', () => {
+            const onPointerMove = vi.fn();
             const { container, svg } = setup({
                 formatValue: undefined,
                 formatTick: (v: number) => `t${v}`,
-                onMouseMove,
+                onPointerMove,
             });
-            fireEvent.mouseMove(svg, { clientX: 56 });
-            expect(onMouseMove).toHaveBeenCalled();
+            fireEvent.pointerMove(svg, { clientX: 56 });
+            expect(onPointerMove).toHaveBeenCalled();
             expect(
                 container.querySelector('[data-part="tooltip"]'),
             ).toHaveTextContent('t5080000');

@@ -1,8 +1,9 @@
-import { useState, type MouseEvent, type SVGAttributes } from 'react';
+import type { SVGAttributes } from 'react';
+import { ChartFrame } from '../Chart/ChartFrame';
 import { niceScale } from '../Chart/niceScale';
+import { useChartHover } from '../Chart/useChartHover';
 import { clsx } from '../utils/clsx';
 import '../Chart/Chart.css';
-import './AreaChart.css';
 
 export type AreaChartProps = {
     /** One value per point, oldest first. */
@@ -22,8 +23,8 @@ const H = 230;
 const PAD = { l: 56, r: 12, t: 12, b: 28 };
 
 /**
- * A smooth line with a soft fill and a dot on the latest value. Hovering shows
- * the nearest point's value in a tooltip.
+ * A smooth line with a soft fill and a dot on the latest value. Hover, touch
+ * or arrow keys show the value of one point in a tooltip.
  */
 export function AreaChart({
     data,
@@ -32,16 +33,22 @@ export function AreaChart({
     formatTick = String,
     formatValue = formatTick,
     className,
-    onMouseMove,
-    onMouseLeave,
     ...props
 }: AreaChartProps) {
-    const [active, setActive] = useState<number | null>(null);
     const n = data.length;
-    if (!n) return null;
-    const { lo, hi, ticks } = niceScale(Math.min(...data), Math.max(...data));
     const x = (i: number) =>
         PAD.l + (n > 1 ? ((W - PAD.l - PAD.r) * i) / (n - 1) : 0);
+    const { active: at, svgProps } = useChartHover({
+        count: n,
+        viewWidth: W,
+        indexAt: (px) =>
+            n > 1
+                ? Math.round(((px - PAD.l) / (W - PAD.l - PAD.r)) * (n - 1))
+                : 0,
+        props,
+    });
+    if (!n) return null;
+    const { lo, hi, ticks } = niceScale(Math.min(...data), Math.max(...data));
     const y = (v: number) =>
         PAD.t + (H - PAD.t - PAD.b) * (1 - (v - lo) / (hi - lo));
     let line = `M${x(0)} ${y(data[0])}`;
@@ -51,34 +58,41 @@ export function AreaChart({
     }
     const area = `${line} L${x(n - 1)} ${H - PAD.b} L${x(0)} ${H - PAD.b} Z`;
     const every = n <= 6 ? 1 : n <= 12 ? 2 : 4;
-    const at = active === null ? null : Math.min(active, n - 1);
-
-    const track = (event: MouseEvent<SVGSVGElement>) => {
-        onMouseMove?.(event);
-        const box = event.currentTarget.getBoundingClientRect();
-        if (!box.width || n < 2) return setActive(n < 2 ? 0 : null);
-        const px = ((event.clientX - box.left) / box.width) * W;
-        const index = Math.round(
-            ((px - PAD.l) / (W - PAD.l - PAD.r)) * (n - 1),
-        );
-        setActive(Math.max(0, Math.min(n - 1, index)));
-    };
+    const title =
+        at === null
+            ? ''
+            : [labels[at], formatValue(data[at])].filter(Boolean).join(': ');
 
     return (
-        <div className="dg-areachart">
-            {/* Hover is an extra: the aria-label already describes the chart. */}
-            {/* oxlint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+        <ChartFrame
+            announce={title}
+            tip={
+                at === null
+                    ? null
+                    : {
+                          x: x(at) / W,
+                          y: y(data[at]) / H,
+                          content: (
+                              <>
+                                  {labels[at] ? (
+                                      <span className="caption dg-chart-tip__label">
+                                          {labels[at]}
+                                      </span>
+                                  ) : null}
+                                  <span className="label">
+                                      {formatValue(data[at])}
+                                  </span>
+                              </>
+                          ),
+                      }
+            }
+        >
             <svg
-                {...props}
+                {...svgProps}
                 className={clsx('dg-chart', className)}
                 viewBox={`0 0 ${W} ${H}`}
                 role="img"
                 aria-label={label}
-                onMouseMove={track}
-                onMouseLeave={(event) => {
-                    onMouseLeave?.(event);
-                    setActive(null);
-                }}
             >
                 {ticks.map((t) => (
                     <g key={t}>
@@ -155,24 +169,6 @@ export function AreaChart({
                     ) : null,
                 )}
             </svg>
-            {at !== null ? (
-                <div
-                    className="dg-areachart__tip"
-                    data-part="tooltip"
-                    style={{
-                        // Keep the bubble inside the chart near the edges.
-                        left: `${Math.max(10, Math.min(90, (x(at) / W) * 100))}%`,
-                        top: `${(y(data[at]) / H) * 100}%`,
-                    }}
-                >
-                    {labels[at] ? (
-                        <span className="caption dg-areachart__tip-label">
-                            {labels[at]}
-                        </span>
-                    ) : null}
-                    <span className="label">{formatValue(data[at])}</span>
-                </div>
-            ) : null}
-        </div>
+        </ChartFrame>
     );
 }

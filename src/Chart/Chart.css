@@ -11,3 +11,41 @@
     stroke: var(--border);
     stroke-width: 1;
 }
+.dg-chart:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+/* Horizontal drags follow the finger; vertical ones still scroll the page. */
+.dg-chart {
+    touch-action: pan-y;
+}
+.dg-chart-wrap {
+    position: relative;
+}
+.dg-chart-tip {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 6px 10px;
+    color: var(--text);
+    white-space: nowrap;
+    pointer-events: none;
+    background: var(--surface-overlay);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md);
+    transform: translate(-50%, calc(-100% - 16px));
+}
+.dg-chart-tip__label {
+    color: var(--text-muted);
+}
+.dg-chart-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}

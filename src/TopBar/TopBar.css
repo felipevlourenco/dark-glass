@@ -1,0 +1,28 @@
+.dg-topbar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+.dg-topbar__crumbs {
+    min-width: 0;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+.dg-topbar__crumbs b {
+    color: var(--text);
+    font-weight: 400;
+}
+.dg-topbar__search {
+    width: 360px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+.dg-topbar__search input {
+    cursor: pointer;
+}
+.dg-topbar__end {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+}

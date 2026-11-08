@@ -4,6 +4,7 @@
     "include": ["src"],
     "exclude": [
         "src/**/*.stories.tsx",
+        "src/**/*.data.ts",
         "src/**/*.test.ts",
         "src/**/*.test.tsx",
         "src/test-setup.ts",

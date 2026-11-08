@@ -1,0 +1,9 @@
+.dg-needs__muted {
+    color: var(--text-muted);
+}
+.dg-needs__value {
+    margin: 4px 0 10px;
+}
+.dg-needs__list {
+    margin-top: var(--space-2);
+}

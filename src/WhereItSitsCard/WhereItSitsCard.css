@@ -1,0 +1,23 @@
+.dg-where__legend {
+    display: grid;
+    grid-template-columns: 12px 1fr auto auto;
+    gap: 4px 12px;
+    align-items: center;
+    margin-top: 14px;
+}
+/* Rows share the legend's columns so the numbers line up. */
+.dg-where__row {
+    display: contents;
+}
+.dg-where__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.dg-where__num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+.dg-where__amount {
+    color: var(--text-muted);
+}
