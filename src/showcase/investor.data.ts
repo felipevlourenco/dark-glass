@@ -7,7 +7,8 @@ import type {
     WhereItSitsSegment,
 } from '../index';
 
-export const eur = (n: number) => `€${Math.round(n).toLocaleString('en-GB')}`;
+export const eur = (n: number) =>
+    `${n < 0 ? '−' : ''}€${Math.abs(Math.round(n)).toLocaleString('en-GB')}`;
 export const eurM = (n: number) => `€${(n / 1e6).toFixed(2)}M`;
 
 const MONTHS = [
