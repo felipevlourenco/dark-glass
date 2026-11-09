@@ -40,10 +40,12 @@
         "./style.css": "./dist/dark-glass.css"
     },
     "scripts": {
-        "build": "vite build && tsc -p tsconfig.build.json --noEmit false --emitDeclarationOnly --declaration --outDir dist",
+        "build": "vite build && tsc -p tsconfig.build.json --noEmit false --emitDeclarationOnly --declaration --outDir dist && node scripts/strip-css-imports.mjs",
         "dev": "vite build --watch",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build",
+        "visual": "playwright test",
+        "visual:update": "playwright test --update-snapshots",
         "typecheck": "tsc --noEmit",
         "test": "vitest run --passWithNoTests",
         "test:watch": "vitest",
@@ -60,6 +62,7 @@
     "devDependencies": {
         "@commitlint/cli": "^21.2.4",
         "@commitlint/config-conventional": "^21.2.4",
+        "@playwright/test": "^1.65.0",
         "@storybook/addon-a11y": "^10.6.5",
         "@storybook/addon-docs": "^10.6.5",
         "@storybook/react-vite": "10.6.5",
@@ -71,6 +74,7 @@
         "@types/react-dom": "^19.3.0",
         "@vitejs/plugin-react": "^6.1.2",
         "axe-core": "4.14.0",
+        "http-server": "^14.1.1",
         "husky": "^9.1.7",
         "jsdom": "^31.0.0",
         "lint-staged": "^17.6.0",

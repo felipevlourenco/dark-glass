@@ -179,4 +179,15 @@ describe('useFlip', () => {
         // 300px panel: no room below inside the scroller (52px), more above.
         expect(result()).toBe('top-none');
     });
+
+    it('caps the height to the roomier side when the panel fits on neither', () => {
+        mockLayout({
+            trigger: { left: 100, top: 400, width: 80, height: 40 },
+            panel: { width: 200, height: 2000 },
+        });
+        render(<Demo vertical="bottom" />);
+        expect(result()).toBe('top-none');
+        // 400px above the trigger, less the 8px gap.
+        expect(screen.getByRole('dialog').style.maxHeight).toBe('392px');
+    });
 });

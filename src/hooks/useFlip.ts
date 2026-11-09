@@ -53,15 +53,16 @@ function visibleBounds(el: HTMLElement): Bounds {
  * Where a panel should sit so it stays visible. It keeps the preferred side
  * unless the panel does not fit there and there is more room on the other, so
  * it never flips to a side that is worse. Room is the viewport narrowed by any
- * ancestor that clips (`overflow` other than visible). It keeps the preferred side
- * unless the panel does not fit there and there is more room on the other, so
- * it never flips to a side that is worse.
+ * ancestor that clips (`overflow` other than visible).
  *
  * It measures when the panel opens, on resize and on scroll of the window or
  * any scroll container.
  *
- * ponytail: it only picks a side, it does not shift or resize the panel to fit
- * a space that is too small on both sides. Reach for floating-ui for that.
+ * A panel taller than the room on the side it ends up on gets a `max-height`
+ * and scrolls inside.
+ *
+ * ponytail: it never shifts a panel sideways to fit a narrow space. Reach for
+ * floating-ui for that.
  */
 export function useFlip({
     open,
@@ -77,6 +78,11 @@ export function useFlip({
         const floating = panel.current;
         if (!open || !trigger || !floating) return;
         const measure = () => {
+            // Measure the panel at its natural size, then cap it below.
+            // oxlint-disable-next-line react/immutability -- sizing the panel it measures
+            floating.style.maxHeight = '';
+            // oxlint-disable-next-line react/immutability -- sizing the panel it measures
+            floating.style.overflowY = '';
             const at = trigger.getBoundingClientRect();
             const { width, height } = floating.getBoundingClientRect();
             // Nothing to measure (not laid out yet, or no layout engine): keep the preference.
@@ -89,6 +95,21 @@ export function useFlip({
                 vertical === 'bottom'
                     ? height > below && above > below
                     : height > above && below > above;
+
+            // Too tall for both sides: fit the roomier one and scroll inside.
+            const fit = v
+                ? vertical === 'bottom'
+                    ? above
+                    : below
+                : vertical === 'bottom'
+                  ? below
+                  : above;
+            if (height > fit && fit > 0) {
+                // oxlint-disable-next-line react/immutability -- sizing the panel it measures
+                floating.style.maxHeight = `${fit}px`;
+                // oxlint-disable-next-line react/immutability -- sizing the panel it measures
+                floating.style.overflowY = 'auto';
+            }
 
             // `start` grows rightwards from the trigger's left edge, `end` leftwards.
             const fromStart = room.right - at.left;
