@@ -135,7 +135,7 @@ If you would rather own the list, render `Toast` inside a `ToastRegion` yourself
 
 ### Known limits
 
-- `DropdownMenu`, `Popover` and `Tooltip` pick the side with more room, counting the viewport and any ancestor that clips (`overflow` other than visible), and measure again on resize and scroll. They only choose a side: they do not shift or resize a panel that is too big for both. Reach for floating-ui if you need that.
+- `DropdownMenu`, `Popover` and `Tooltip` pick the side with more room, counting the viewport and any ancestor that clips (`overflow` other than visible), and measure again on resize and scroll. When a panel fits on neither side they cap its height to the roomier one and let it scroll. They never shift a panel sideways; reach for floating-ui if you need that.
 - `AreaChart` and `BarChart` show a tooltip on hover, touch and arrow keys. Touch keeps the tooltip until focus moves away.
 - Axe in the test suite runs in jsdom, which cannot compute colour contrast. Contrast is checked for the status colours by a token test, and was checked in a real browser across every story and both themes.
 
@@ -157,6 +157,8 @@ pnpm test           # unit tests
 pnpm lint           # oxlint
 pnpm typecheck
 pnpm build          # library into dist/
+pnpm visual         # screenshot check of the showcase stories (needs Chrome and build-storybook first)
+pnpm visual:update  # accept new screenshots
 ```
 
 Commits and PR titles follow [Conventional Commits](https://www.conventionalcommits.org/). Merging to `main` runs the checks, then releases to npm and GitHub (`feat` is a minor, `fix` a patch) and deploys Storybook to GitHub Pages.
